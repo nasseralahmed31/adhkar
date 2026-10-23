@@ -1104,6 +1104,8 @@ body[data-calm="1"] .dhikr-text{font-size:clamp(28px,3.6vw,40px)}
 @media(max-width:700px){body[data-calm="1"] .dhikr-text{font-size:27px}.sgrid{gap:6px}.cc{min-height:44px}}
 
 .logo-icon{background:none!important;box-shadow:none!important;overflow:hidden}.logo-icon img{width:100%;height:100%;object-fit:contain;display:block}
+body.theme-white{--bg:#ffffff;--bg2:#f2f4f2;--card:rgba(255,255,255,.97);--text:#1f2a1f;--muted:#667066;--primary:#4d7a48;--primary2:#6a9a64;--accent:#b59b55;--border:rgba(0,0,0,.1);--success:#3f8a50}
+.white-preview{background:linear-gradient(90deg,#fff,#4d7a48);border:1px solid #d5d9d5}
 </style>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
@@ -2361,7 +2363,8 @@ function loadState() {
         "night",
         "gold",
         "rose",
-        "sand"
+        "sand",
+    "white"
     ];
 
     if (
@@ -3800,7 +3803,8 @@ function setTheme(theme) {
         "night",
         "gold",
         "rose",
-        "sand"
+        "sand",
+    "white"
     ];
 
     if (
@@ -4917,7 +4921,7 @@ setInterval(()=>{
  const d=new Date(),hm=pad(d.getHours())+':'+pad(d.getMinutes()),day=dateKey();
  Object.keys(state.reminders||{}).forEach(s=>{
   const r=state.reminders[s];
-  if(r.on&&r.time===hm&&remFired[s]!==day+hm){remFired[s]=day+hm;notifyRem(s)}
+  if(r.on&&r.time===hm&&remFired[s]!==day+hm&&!(window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.LocalNotifications)){remFired[s]=day+hm;notifyRem(s)}
  });
 },20000);
 
@@ -4976,6 +4980,31 @@ else init();
 
 </script>
 
+<script>
+(function(){
+function pad(n){return String(n).padStart(2,'0')}
+function makeICS(){
+ var nm={morning:'أذكار الصباح',evening:'أذكار المساء',sleep:'أذكار النوم'},R=state.reminders||{},keys=Object.keys(nm),on=keys.filter(function(k){return R[k]&&R[k].on});
+ if(!on.length)on=keys;
+ var d=new Date(),ymd=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate()),o='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Adhkari//AR\r\nCALSCALE:GREGORIAN\r\n';
+ on.forEach(function(k){
+  var t=(R[k]&&R[k].time||'06:00').split(':').map(Number),s=new Date(2000,0,1,t[0],t[1]),e=new Date(s.getTime()+600000);
+  var st=ymd+'T'+pad(s.getHours())+pad(s.getMinutes())+'00',en=ymd+'T'+pad(e.getHours())+pad(e.getMinutes())+'00';
+  o+='BEGIN:VEVENT\r\nUID:adhkari-'+k+'@adhkari\r\nDTSTAMP:'+ymd+'T000000Z\r\nDTSTART:'+st+'\r\nDTEND:'+en+'\r\nRRULE:FREQ=DAILY\r\nSUMMARY:'+nm[k]+' 🌿\r\nDESCRIPTION:حان وقت '+nm[k]+'\r\nBEGIN:VALARM\r\nTRIGGER:PT0S\r\nACTION:DISPLAY\r\nDESCRIPTION:'+nm[k]+'\r\nEND:VALARM\r\nEND:VEVENT\r\n';
+ });
+ o+='END:VCALENDAR\r\n';
+ var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([o],{type:'text/calendar;charset=utf-8'}));a.download='adhkari.ics';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500);
+ showToast('افتح الملف واختر «تقويم» لإضافة التذكيرات اليومية 📅');
+}
+function init2(){
+ var g=document.querySelector('.theme-grid');
+ if(g){g.insertAdjacentHTML('beforeend','<button type="button" class="theme-option" data-theme="white"><div class="theme-preview white-preview"></div>أبيض نهاري</button>');updateThemeButtons()}
+ var r=document.querySelector('[data-ro="morning"]');
+ if(r&&!(window.Capacitor&&Capacitor.isNativePlatform&&Capacitor.isNativePlatform())){r.closest('.setting-group').insertAdjacentHTML('beforeend','<button type="button" class="reset-btn" id="icsBtn" style="margin-top:10px;color:var(--primary);border-color:var(--border);background:transparent">📅 إضافة التذكيرات إلى تقويم الهاتف (تعمل والتطبيق مغلق)</button>');document.getElementById('icsBtn').onclick=makeICS}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init2,false);else init2();
+})();
+</script>
 <script>
 if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(e){console.warn('SW',e)})})}
 </script>
