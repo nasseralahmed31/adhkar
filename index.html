@@ -1,0 +1,4983 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#607d5a">
+<title>أذكاري | أذكار الصباح والمساء</title>
+<meta name="description" content="تطبيق أذكاري لأذكار الصباح والمساء والنوم والاستيقاظ مع عداد التكرار ومتابعة أيام الاستمرار (Streak)." />
+<meta property="og:title" content="أذكاري | أذكار الصباح والمساء" />
+<meta property="og:description" content="تطبيق أذكاري لأذكار الصباح والمساء والنوم والاستيقاظ مع عداد التكرار ومتابعة أيام الاستمرار (Streak)." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&family=Lateef:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #f4f7f1;
+    --bg2: #e8eee3;
+    --card: rgba(255,255,255,.88);
+    --text: #243024;
+    --muted: #687468;
+    --primary: #607d5a;
+    --primary2: #78936f;
+    --accent: #b59b55;
+    --border: rgba(70,90,65,.14);
+    --shadow: 0 15px 45px rgba(40,60,40,.12);
+    --success: #4d8a5b;
+    --danger: #b85c5c;
+    --radius: 26px;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Noto Naskh Arabic', serif;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(181,155,85,.12), transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(96,125,90,.14), transparent 35%),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+    color: var(--text);
+    transition: background .45s ease, color .45s ease;
+    overflow-x: hidden;
+}
+
+/* =========================
+   THEMES
+========================= */
+
+body.theme-olive {
+    --bg: #f4f7f1;
+    --bg2: #e8eee3;
+    --card: rgba(255,255,255,.88);
+    --text: #243024;
+    --muted: #687468;
+    --primary: #607d5a;
+    --primary2: #78936f;
+    --accent: #b59b55;
+    --border: rgba(70,90,65,.14);
+    --success: #4d8a5b;
+}
+
+body.theme-night {
+    --bg: #101827;
+    --bg2: #17263c;
+    --card: rgba(23,36,55,.92);
+    --text: #edf3fb;
+    --muted: #aebbd0;
+    --primary: #5d8fc7;
+    --primary2: #7aa9dd;
+    --accent: #d2b45e;
+    --border: rgba(180,210,240,.12);
+    --success: #65a978;
+}
+
+body.theme-gold {
+    --bg: #faf5e7;
+    --bg2: #eee2c2;
+    --card: rgba(255,251,240,.92);
+    --text: #40351d;
+    --muted: #817351;
+    --primary: #a58232;
+    --primary2: #c09b45;
+    --accent: #70551e;
+    --border: rgba(130,100,35,.15);
+    --success: #658348;
+}
+
+body.theme-rose {
+    --bg: #faf2f3;
+    --bg2: #f1e0e4;
+    --card: rgba(255,250,251,.9);
+    --text: #422d34;
+    --muted: #806d73;
+    --primary: #a96879;
+    --primary2: #c28595;
+    --accent: #a98255;
+    --border: rgba(130,70,90,.14);
+    --success: #608d68;
+}
+
+body.theme-sand {
+    --bg: #f6f1e8;
+    --bg2: #e9dfcf;
+    --card: rgba(255,252,246,.92);
+    --text: #40382e;
+    --muted: #81776a;
+    --primary: #8b7353;
+    --primary2: #aa916c;
+    --accent: #657b56;
+    --border: rgba(100,80,50,.14);
+    --success: #5d865d;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.app {
+    width: min(1100px, 94%);
+    margin: auto;
+    padding: 20px 0 45px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 17px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--primary), var(--primary2));
+    color: white;
+    font-size: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.12);
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.logo p {
+    margin: 2px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    width: 46px;
+    height: 46px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: .25s;
+    box-shadow: 0 6px 20px rgba(0,0,0,.06);
+    touch-action: manipulation;
+}
+
+.icon-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+}
+
+/* =========================
+   NAV
+========================= */
+
+.tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.tab {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--muted);
+    padding: 13px 8px;
+    border-radius: 17px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    transition: .25s;
+    touch-action: manipulation;
+}
+
+.tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 8px 20px rgba(0,0,0,.1);
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-area {
+    margin-bottom: 18px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.progress-track {
+    width: 100%;
+    height: 8px;
+    background: rgba(100,120,100,.13);
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transition: width .5s cubic-bezier(.4,0,.2,1);
+}
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.card-wrap {
+    position: relative;
+    min-height: 510px;
+}
+
+.dhikr-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 38px 42px 32px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    min-height: 510px;
+    overflow: hidden;
+    transition: .35s;
+}
+
+.dhikr-card::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: .045;
+    top: -110px;
+    left: -80px;
+}
+
+.dhikr-number {
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.dhikr-text {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(25px, 3.1vw, 36px);
+    line-height: 2;
+    text-align: center;
+    min-height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: pre-line;
+    transition: opacity .25s, transform .25s;
+}
+
+.dhikr-source {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.dhikr-source::before {
+    content: "— ";
+}
+
+.dhikr-source::after {
+    content: " —";
+}
+
+/* =========================
+   CIRCLE
+========================= */
+
+.circle-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto 15px;
+}
+
+.circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.circle svg {
+    width: 120px;
+    height: 120px;
+    transform: rotate(-90deg);
+}
+
+.circle-bg {
+    fill: none;
+    stroke: rgba(100,120,100,.12);
+    stroke-width: 8;
+}
+
+.circle-progress {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset .4s ease, stroke .3s;
+}
+
+.circle-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-count {
+    font-family: 'Cairo', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.circle-label {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.circle.complete .circle-progress {
+    stroke: var(--success);
+}
+
+.circle-check {
+    position: absolute;
+    inset: 0;
+    display: none;
+    place-items: center;
+    font-size: 38px;
+    color: var(--success);
+    background: var(--card);
+    border-radius: 50%;
+}
+
+.circle.complete .circle-check {
+    display: grid;
+}
+
+.circle.complete .circle-content {
+    opacity: 0;
+}
+
+/* =========================
+   COUNTER
+========================= */
+
+.counter-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.counter-btn {
+    width: 82px;
+    height: 82px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--primary), var(--primary2));
+    color: white;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(0,0,0,.15);
+    transition: transform .12s, box-shadow .2s;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.counter-btn:active {
+    transform: scale(.91);
+    box-shadow: 0 5px 15px rgba(0,0,0,.12);
+}
+
+.counter-btn:disabled {
+    opacity: .65;
+    cursor: default;
+}
+
+.counter-hint {
+    color: var(--muted);
+    font-size: 13px;
+    max-width: 130px;
+}
+
+/* =========================
+   NAV BUTTONS
+========================= */
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.nav-btn {
+    flex: 1;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    padding: 14px 20px;
+    border-radius: 17px;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    transition: .25s;
+    touch-action: manipulation;
+}
+
+.nav-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+}
+
+.nav-btn.primary {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.nav-btn:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+/* =========================
+   COMPLETION
+========================= */
+
+.completion {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.completion.show {
+    display: block;
+    animation: pop .5s ease;
+}
+
+.completion-icon {
+    font-size: 70px;
+    margin-bottom: 15px;
+}
+
+.completion h2 {
+    margin: 0 0 8px;
+    font-size: 29px;
+}
+
+.completion p {
+    color: var(--muted);
+    margin-bottom: 25px;
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.42);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    display: none;
+}
+
+.overlay.show {
+    display: block;
+}
+
+.panel {
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    bottom: 0;
+    right: -420px;
+    width: min(390px, 92%);
+    background: var(--card);
+    color: var(--text);
+    box-shadow: -10px 0 40px rgba(0,0,0,.18);
+    padding: 25px;
+    overflow-y: auto;
+    transition: right .35s cubic-bezier(.4,0,.2,1);
+}
+
+.panel.show {
+    right: 0;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.panel-header h2 {
+    margin: 0;
+}
+
+.close-btn {
+    border: none;
+    background: rgba(100,100,100,.1);
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    touch-action: manipulation;
+}
+
+.setting-group {
+    margin-bottom: 27px;
+}
+
+.setting-group h3 {
+    margin: 0 0 12px;
+    font-size: 17px;
+}
+
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.theme-option {
+    border: 2px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    border-radius: 15px;
+    padding: 13px 10px;
+    cursor: pointer;
+    font-family: inherit;
+    touch-action: manipulation;
+}
+
+.theme-option.active {
+    border-color: var(--primary);
+}
+
+.theme-preview {
+    height: 28px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.olive-preview {
+    background: linear-gradient(90deg,#607d5a,#b59b55);
+}
+
+.night-preview {
+    background: linear-gradient(90deg,#101827,#5d8fc7);
+}
+
+.gold-preview {
+    background: linear-gradient(90deg,#a58232,#e4c878);
+}
+
+.rose-preview {
+    background: linear-gradient(90deg,#a96879,#d6a0ad);
+}
+
+.sand-preview {
+    background: linear-gradient(90deg,#8b7353,#c6ad86);
+}
+
+.font-select {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    border-radius: 13px;
+    padding: 13px;
+    font-family: inherit;
+    outline: none;
+}
+
+.reset-btn {
+    width: 100%;
+    border: 1px solid rgba(180,80,80,.25);
+    background: rgba(180,80,80,.07);
+    color: var(--danger);
+    padding: 13px;
+    border-radius: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+/* =========================
+   STREAK
+========================= */
+
+.streak-panel {
+    position: fixed;
+    z-index: 101;
+    inset: 3%;
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.22);
+    padding: 25px;
+    overflow-y: auto;
+    display: none;
+    animation: pop .3s ease;
+}
+
+.streak-panel.show {
+    display: block;
+}
+
+.streak-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.streak-header h2 {
+    margin: 0;
+}
+
+/* العام */
+
+.general-streak {
+    text-align: center;
+    padding: 22px 15px;
+    margin-bottom: 18px;
+    border-radius: 22px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(96,125,90,.10),
+            rgba(181,155,85,.10)
+        );
+    border: 1px solid var(--border);
+}
+
+.general-streak .streak-fire {
+    margin-bottom: 5px;
+}
+
+.general-streak .streak-number {
+    font-size: 58px;
+}
+
+.general-label {
+    color: var(--muted);
+    font-size: 16px;
+}
+
+/* بطاقات الأقسام */
+
+.section-streaks-title {
+    text-align: center;
+    font-size: 18px;
+    margin: 8px 0 12px;
+}
+
+.section-streak-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.section-streak-card {
+    border: 1px solid var(--border);
+    background: rgba(100,120,100,.045);
+    border-radius: 20px;
+    padding: 17px 12px;
+    text-align: center;
+    transition: .25s;
+}
+
+.section-streak-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+}
+
+.section-streak-icon {
+    font-size: 30px;
+    margin-bottom: 4px;
+}
+
+.section-streak-name {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.section-streak-number {
+    font-family: 'Cairo', sans-serif;
+    font-size: 34px;
+    line-height: 1.15;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.section-streak-label {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.section-streak-status {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.section-streak-status.active {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.streak-info {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.streak-info-box {
+    background: rgba(100,120,100,.06);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px 12px;
+    text-align: center;
+}
+
+.streak-info-box span {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.streak-info-box strong {
+    display: block;
+    font-size: 17px;
+}
+
+.streak-message {
+    text-align: center;
+    color: var(--muted);
+    line-height: 1.9;
+    margin: 18px auto 5px;
+    max-width: 650px;
+    padding: 15px;
+    border-radius: 15px;
+    background: rgba(100,120,100,.05);
+}
+
+@keyframes streakPulse {
+    0%,100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, 120px);
+    background: var(--text);
+    color: var(--bg);
+    padding: 12px 20px;
+    border-radius: 14px;
+    z-index: 300;
+    font-size: 14px;
+    opacity: 0;
+    transition: .3s;
+    pointer-events: none;
+    max-width: 90%;
+    text-align: center;
+}
+
+.toast.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+.fade-out {
+    opacity: 0;
+    transform: translateX(25px);
+}
+
+.fade-in {
+    animation: slideIn .35s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pop {
+    from {
+        opacity: 0;
+        transform: scale(.94);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .app {
+        width: 94%;
+        padding-top: 13px;
+    }
+
+    .header {
+        margin-bottom: 14px;
+    }
+
+    .logo-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        font-size: 21px;
+    }
+
+    .logo h1 {
+        font-size: 20px;
+    }
+
+    .logo p {
+        font-size: 11px;
+    }
+
+    .icon-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+    }
+
+    .tabs {
+        gap: 5px;
+    }
+
+    .tab {
+        padding: 11px 4px;
+        font-size: 13px;
+        border-radius: 14px;
+    }
+
+    .dhikr-card {
+        min-height: 570px;
+        padding: 27px 18px 25px;
+        border-radius: 23px;
+    }
+
+    .dhikr-text {
+        font-size: 24px;
+        line-height: 1.95;
+        min-height: 270px;
+    }
+
+    .dhikr-number {
+        margin-bottom: 10px;
+    }
+
+    .circle {
+        width: 105px;
+        height: 105px;
+    }
+
+    .circle svg {
+        width: 105px;
+        height: 105px;
+    }
+
+    .circle-count {
+        font-size: 21px;
+    }
+
+    .counter-btn {
+        width: 76px;
+        height: 76px;
+    }
+
+    .navigation {
+        margin-top: 13px;
+    }
+
+    .nav-btn {
+        padding: 13px 8px;
+        font-size: 14px;
+    }
+
+    .streak-panel {
+        inset: 2%;
+        padding: 17px;
+        border-radius: 21px;
+    }
+
+    .section-streak-grid {
+        grid-template-columns: repeat(2,1fr);
+        gap: 8px;
+    }
+
+    .section-streak-card {
+        padding: 14px 8px;
+    }
+
+    .section-streak-icon {
+        font-size: 25px;
+    }
+
+    .section-streak-number {
+        font-size: 30px;
+    }
+
+    .streak-info {
+        grid-template-columns: 1fr;
+    }
+
+    .streak-number {
+        font-size: 52px;
+    }
+
+    .streak-fire {
+        font-size: 58px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .dhikr-text {
+        font-size: 21px;
+    }
+
+    .tab {
+        font-size: 12px;
+    }
+
+    .logo p {
+        display: none;
+    }
+
+    .section-streak-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .section-streak-name {
+        font-size: 13px;
+    }
+}
+
+/* ===== ميزات إضافية ===== */
+.dsum{text-align:center;padding:18px;border-radius:20px;border:1px solid var(--border);background:linear-gradient(135deg,rgba(96,125,90,.1),rgba(181,155,85,.1));margin-bottom:12px}
+.dsum .big{font-family:'Cairo',sans-serif;font-size:54px;font-weight:700;color:var(--primary);line-height:1.1}
+.dsum small,.dcard small{color:var(--muted);font-size:13px}
+.dcard{border:1px solid var(--border);border-radius:16px;padding:13px;margin-bottom:9px;background:rgba(100,120,100,.045)}
+.dtop{display:flex;justify-content:space-between;margin-bottom:7px}
+.dbar{height:9px;border-radius:9px;background:rgba(100,120,100,.14);overflow:hidden;margin-bottom:6px}
+.dbar i{display:block;height:100%;border-radius:9px;transition:width .5s}
+.dtabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px}
+.dtab{border:1px solid var(--border);background:transparent;color:var(--muted);padding:10px 4px;border-radius:13px;font-family:inherit;font-size:14px;cursor:pointer}
+.dtab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.calnav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.calnav .nav-btn{flex:none;padding:8px 18px}
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.ch{text-align:center;color:var(--muted);font-size:13px;padding:3px 0}
+.cc{border:1px solid var(--border);border-radius:11px;min-height:50px;padding:4px 2px;text-align:center;font-size:13px;background:rgba(100,120,100,.04)}
+.cc.td{border:2px solid var(--primary)}
+.cc b{display:block;font-family:'Cairo',sans-serif;font-size:13px}
+.cc span{display:flex;flex-wrap:wrap;justify-content:center;gap:2px;margin-top:3px}
+.cc i,.leg i{display:inline-block;width:8px;height:8px;border-radius:50%}
+.leg{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:12px;font-size:13px;color:var(--muted)}
+.leg i{margin-left:4px}
+.sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:12px}
+.sbox{border:1px solid var(--border);border-radius:16px;padding:13px 8px;text-align:center;background:rgba(100,120,100,.05)}
+.sbox b{display:block;font-family:'Cairo',sans-serif;font-size:28px;color:var(--primary)}
+.sbox span{font-size:12px;color:var(--muted)}
+.chart{display:flex;align-items:flex-end;justify-content:space-around;height:120px;padding:8px;border:1px solid var(--border);border-radius:16px;margin-bottom:6px}
+.chart div{flex:1;text-align:center;font-size:12px;color:var(--muted);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+.chart i{display:block;width:60%;max-width:26px;border-radius:7px 7px 0 0;background:var(--primary);min-height:3px}
+.h4{margin:14px 0 8px;font-size:15px}
+.rem-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.rem-row span{flex:1}
+.rem-row input[type=time]{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:10px;padding:7px;font-family:inherit}
+.rem-row input[type=checkbox],.opt input{width:20px;height:20px;accent-color:var(--primary)}
+.opt{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.note{color:var(--muted);font-size:12px;line-height:1.8;margin:6px 0 0}
+.undo-row{text-align:center;margin-top:8px}
+.undo-row .nav-btn{flex:none;padding:8px 16px;font-size:13px}
+#completion .nav-btn{display:inline-block;flex:none;margin:5px;min-width:150px}
+.how{margin:14px 0 0;border:1px solid var(--border);border-radius:15px;padding:11px 14px;background:rgba(100,120,100,.05);font-size:14px;line-height:1.9}
+.how summary{cursor:pointer;font-weight:700}
+.lastdates{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px;font-size:13px}
+.lastdates div{border:1px solid var(--border);border-radius:13px;padding:9px;text-align:center;color:var(--muted)}
+.lastdates b{display:block;color:var(--text);font-size:14px}
+.dhikr-source{cursor:pointer;text-decoration:underline dotted;text-underline-offset:5px}
+.src-modal{position:fixed;z-index:102;top:50%;left:50%;transform:translate(-50%,-50%);width:min(440px,92%);max-height:85vh;overflow-y:auto;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:24px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.25);display:none;line-height:1.9}
+.src-modal.show{display:block;animation:pop .25s ease}
+.src-row{border-bottom:1px solid var(--border);padding:8px 0;font-size:15px}
+.src-row small{display:block;color:var(--muted);font-size:12px}
+#calmExit{display:none;position:fixed;top:12px;left:12px;z-index:90;width:40px;height:40px;font-size:16px;opacity:.7}
+body[data-calm="1"] #calmExit{display:block}
+body[data-calm="1"] .header,body[data-calm="1"] .tabs,body[data-calm="1"] .progress-area,body[data-calm="1"] .counter-hint{display:none}
+body[data-calm="1"] .dhikr-text{font-size:clamp(28px,3.6vw,40px)}
+@media(max-width:700px){body[data-calm="1"] .dhikr-text{font-size:27px}.sgrid{gap:6px}.cc{min-height:44px}}
+
+.logo-icon{background:none!important;box-shadow:none!important;overflow:hidden}.logo-icon img{width:100%;height:100%;object-fit:contain;display:block}
+</style>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-maskable-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="أذكاري">
+</head>
+
+<body class="theme-olive">
+
+<div class="app">
+
+<header class="header">
+
+    <div class="logo">
+
+        <div class="logo-icon"><img src="icon-192.png" alt="أذكاري"></div>
+
+        <div>
+            <h1>أذكاري</h1>
+            <p>أذكار الصباح والمساء والنوم والاستيقاظ</p>
+        </div>
+
+    </div>
+
+    <div class="header-actions">
+
+        <button
+            type="button"
+            class="icon-btn"
+            id="streakBtn"
+            title="أيام الاستمرار">
+            🔥
+        </button>
+
+        <button
+            type="button"
+            class="icon-btn"
+            id="settingsBtn"
+            title="الإعدادات">
+            ⚙️
+        </button>
+
+    </div>
+
+</header>
+
+<nav class="tabs">
+
+    <button
+        type="button"
+        class="tab active"
+        data-section="morning">
+        🌅 الصباح
+    </button>
+
+    <button
+        type="button"
+        class="tab"
+        data-section="evening">
+        🌇 المساء
+    </button>
+
+    <button
+        type="button"
+        class="tab"
+        data-section="sleep">
+        🌙 النوم
+    </button>
+
+    <button
+        type="button"
+        class="tab"
+        data-section="wake">
+        ☀️ الاستيقاظ
+    </button>
+
+</nav>
+
+<section class="progress-area">
+
+    <div class="progress-info">
+
+        <span id="progressText">
+            الذكر 1 من 13
+        </span>
+
+        <span id="progressPercent">
+            0%
+        </span>
+
+    </div>
+
+    <div class="progress-track">
+
+        <div
+            class="progress-bar"
+            id="progressBar">
+        </div>
+
+    </div>
+
+</section>
+
+<main class="card-wrap">
+
+<div class="dhikr-card" id="dhikrCard">
+
+    <div
+        class="dhikr-number"
+        id="dhikrNumber">
+    </div>
+
+    <div
+        class="dhikr-text"
+        id="dhikrText">
+    </div>
+
+    <div
+        class="dhikr-source"
+        id="dhikrSource">
+    </div>
+
+    <div class="circle-area">
+
+        <div class="circle" id="circle">
+
+            <svg viewBox="0 0 120 120">
+
+                <circle
+                    class="circle-bg"
+                    cx="60"
+                    cy="60"
+                    r="50">
+                </circle>
+
+                <circle
+                    class="circle-progress"
+                    id="circleProgress"
+                    cx="60"
+                    cy="60"
+                    r="50">
+                </circle>
+
+            </svg>
+
+            <div class="circle-content">
+
+                <div
+                    class="circle-count"
+                    id="circleCount">
+                    0/1
+                </div>
+
+                <div class="circle-label">
+                    التكرار
+                </div>
+
+            </div>
+
+            <div class="circle-check">
+                ✓
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="counter-section">
+
+        <button
+            type="button"
+            class="counter-btn"
+            id="counterBtn">
+            تكرار
+        </button>
+
+        <div
+            class="counter-hint"
+            id="counterHint">
+            اضغط للذكر مرة واحدة
+        </div>
+
+    </div>
+
+</div>
+
+<div class="completion" id="completion">
+
+    <div class="completion-icon">
+        🌿
+    </div>
+
+    <h2>
+        أحسنت، أتممت الأذكار
+    </h2>
+
+    <p id="completionText">
+        تقبّل الله منك وكتب لك الأجر.
+    </p>
+
+    <button
+        type="button"
+        class="nav-btn primary"
+        id="restartBtn">
+        🔄 إعادة القسم
+    </button>
+
+</div>
+
+</main>
+
+<div class="navigation">
+
+    <button
+        type="button"
+        class="nav-btn"
+        id="prevBtn">
+        → السابق
+    </button>
+
+    <button
+        type="button"
+        class="nav-btn primary"
+        id="nextBtn">
+        التالي ←
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- OVERLAY -->
+
+<div
+    class="overlay"
+    id="overlay">
+</div>
+
+
+<!-- SETTINGS -->
+
+<aside
+    class="panel"
+    id="settingsPanel">
+
+    <div class="panel-header">
+
+        <h2>
+            ⚙️ الإعدادات
+        </h2>
+
+        <button
+            type="button"
+            class="close-btn"
+            id="closeSettings">
+            ×
+        </button>
+
+    </div>
+
+    <div class="setting-group">
+
+        <h3>
+            🎨 المظهر
+        </h3>
+
+        <div class="theme-grid">
+
+            <button
+                type="button"
+                class="theme-option active"
+                data-theme="olive">
+
+                <div class="theme-preview olive-preview"></div>
+
+                هدوء زيتوني
+
+            </button>
+
+            <button
+                type="button"
+                class="theme-option"
+                data-theme="night">
+
+                <div class="theme-preview night-preview"></div>
+
+                ليل أزرق
+
+            </button>
+
+            <button
+                type="button"
+                class="theme-option"
+                data-theme="gold">
+
+                <div class="theme-preview gold-preview"></div>
+
+                ذهبي
+
+            </button>
+
+            <button
+                type="button"
+                class="theme-option"
+                data-theme="rose">
+
+                <div class="theme-preview rose-preview"></div>
+
+                وردي هادئ
+
+            </button>
+
+            <button
+                type="button"
+                class="theme-option"
+                data-theme="sand">
+
+                <div class="theme-preview sand-preview"></div>
+
+                رملي
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="setting-group">
+
+        <h3>
+            🔤 نوع الخط
+        </h3>
+
+        <select
+            class="font-select"
+            id="fontSelect">
+
+            <option value="'Noto Naskh Arabic', serif">
+                Noto Naskh Arabic
+            </option>
+
+            <option value="'Amiri', serif">
+                Amiri
+            </option>
+
+            <option value="'Scheherazade New', serif">
+                Scheherazade New
+            </option>
+
+            <option value="'Lateef', serif">
+                Lateef
+            </option>
+
+            <option value="'Cairo', sans-serif">
+                Cairo
+            </option>
+
+            <option value="'Reem Kufi', sans-serif">
+                Reem Kufi
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="setting-group">
+
+        <h3>
+            💾 البيانات
+        </h3>
+
+        <button
+            type="button"
+            class="reset-btn"
+            id="resetBtn">
+            حذف التقدم
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- STREAK PANEL -->
+
+<section
+    class="streak-panel"
+    id="streakPanel">
+
+    <div class="streak-header">
+
+        <h2>
+            🔥 أيام الاستمرار
+        </h2>
+
+        <button
+            type="button"
+            class="close-btn"
+            id="closeStreak">
+            ×
+        </button>
+
+    </div>
+
+    <div class="general-streak">
+
+        <div class="streak-fire">
+            🔥
+        </div>
+
+        <div
+            class="streak-number"
+            id="generalStreakNumber">
+            0
+        </div>
+
+        <div class="general-label">
+            يوم متتالي بشكل عام
+        </div>
+
+    </div>
+
+    <div class="section-streaks-title">
+        استمرار كل قسم
+    </div>
+
+    <div class="section-streak-grid">
+
+        <div class="section-streak-card">
+
+            <div class="section-streak-icon">
+                🌅
+            </div>
+
+            <div class="section-streak-name">
+                الصباح
+            </div>
+
+            <div
+                class="section-streak-number"
+                id="morningStreakNumber">
+                0
+            </div>
+
+            <div class="section-streak-label">
+                يوم متتالي
+            </div>
+
+            <div
+                class="section-streak-status"
+                id="morningStreakStatus">
+                غير نشط اليوم
+            </div>
+
+        </div>
+
+        <div class="section-streak-card">
+
+            <div class="section-streak-icon">
+                🌇
+            </div>
+
+            <div class="section-streak-name">
+                المساء
+            </div>
+
+            <div
+                class="section-streak-number"
+                id="eveningStreakNumber">
+                0
+            </div>
+
+            <div class="section-streak-label">
+                يوم متتالي
+            </div>
+
+            <div
+                class="section-streak-status"
+                id="eveningStreakStatus">
+                غير نشط اليوم
+            </div>
+
+        </div>
+
+        <div class="section-streak-card">
+
+            <div class="section-streak-icon">
+                🌙
+            </div>
+
+            <div class="section-streak-name">
+                النوم
+            </div>
+
+            <div
+                class="section-streak-number"
+                id="sleepStreakNumber">
+                0
+            </div>
+
+            <div class="section-streak-label">
+                يوم متتالي
+            </div>
+
+            <div
+                class="section-streak-status"
+                id="sleepStreakStatus">
+                غير نشط اليوم
+            </div>
+
+        </div>
+
+        <div class="section-streak-card">
+
+            <div class="section-streak-icon">
+                ☀️
+            </div>
+
+            <div class="section-streak-name">
+                الاستيقاظ
+            </div>
+
+            <div
+                class="section-streak-number"
+                id="wakeStreakNumber">
+                0
+            </div>
+
+            <div class="section-streak-label">
+                يوم متتالي
+            </div>
+
+            <div
+                class="section-streak-status"
+                id="wakeStreakStatus">
+                غير نشط اليوم
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="streak-info">
+
+        <div class="streak-info-box">
+
+            <span>
+                نشاط اليوم
+            </span>
+
+            <strong id="streakToday">
+                لم تبدأ بعد
+            </strong>
+
+        </div>
+
+        <div class="streak-info-box">
+
+            <span>
+                آخر نشاط عام
+            </span>
+
+            <strong id="lastActiveDay">
+                —
+            </strong>
+
+        </div>
+
+    </div>
+
+    <p
+        class="streak-message"
+        id="streakMessage">
+        ابدأ أذكارك اليوم لتحافظ على الاستمرار 🌿
+    </p>
+
+</section>
+
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<script>
+
+/* =========================================================
+   بيانات الأذكار
+========================================================= */
+
+const adhkarData = {
+
+    morning: [
+
+        {
+            text: "آية الكرسي (البقرة 255) والمعوذات (الإخلاص، الفلق، الناس)",
+            repeat: 1,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ. رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكَبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ",
+            repeat: 1,
+            source: "صحيح مسلم"
+        },
+
+        {
+            text: "اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ",
+            repeat: 1,
+            source: "سنن الترمذي"
+        },
+
+        {
+            text: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ رَبِّ الْعَالَمِينَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ هَذَا الْيَوْمِ، فَتْحَهُ، وَنَصْرَهُ، وَنُورَهُ وَبَرَكَتَهُ، وَهُدَاهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِيهِ وَشَرِّ مَا بَعْدَهُ",
+            repeat: 1,
+            source: "سنن أبي داود"
+        },
+
+        {
+            text: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+            repeat: 1,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "اللَّهُمَّ عَالِمَ الغَيْبِ وَالشَّهَادَةِ، فَاطِرَ السَّمَوَاتِ وَالْأَرْضِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ",
+            repeat: 1,
+            source: "سنن الترمذي"
+        },
+
+        {
+            text: "اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ، وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ، وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ",
+            repeat: 4,
+            source: "سنن أبي داود"
+        },
+
+        {
+            text: "يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ أَصْلِحْ لِي شَأْنِي كُلَّهُ وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ",
+            repeat: 3,
+            source: "صحيح ابن حبان"
+        },
+
+        {
+            text: "اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ عَلَى نَبِيِّنَا مُحَمَّدٍ",
+            repeat: 10,
+            source: "فضل الصلاة على النبي ﷺ"
+        },
+
+        {
+            text: "رَضِيتُ بِاللَّهِ رَبًّا وَبِالْإِسْلَامِ دِينًا وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا",
+            repeat: 3,
+            source: "سنن أبي داود"
+        },
+
+        {
+            text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي وَعَنْ يَمِينِي وَعَنْ شِمَالِي وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي",
+            repeat: 1,
+            source: "سنن أبي داود"
+        },
+
+        {
+            text: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
+            repeat: 3,
+            source: "سنن الترمذي"
+        },
+
+        {
+            text: "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+            repeat: 3,
+            source: "صحيح مسلم"
+        }
+
+    ],
+
+    evening: [
+
+        {
+            text: "آية الكرسي (البقرة 255) والمعوذات (الإخلاص، الفلق، الناس)",
+            repeat: 1,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ.",
+            repeat: 1,
+            source: "صحيح مسلم"
+        },
+
+        {
+            text: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.",
+            repeat: 1,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ، وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ، وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ.",
+            repeat: 4,
+            source: "سنن أبي داود"
+        },
+
+        {
+            text: "اللَّهُمَّ مَا أَمْسَى بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ، فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ.",
+            repeat: 1,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ، وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.",
+            repeat: 7,
+            source: "سنن أبي داود"
+        },
+
+        {
+            text: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ.",
+            repeat: 3,
+            source: "سنن الترمذي"
+        },
+
+        {
+            text: "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا.",
+            repeat: 3,
+            source: "سنن أبي داود"
+        },
+
+        {
+            text: "يَا حَيُّ يَا قَيُّومُ، بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ.",
+            repeat: 1,
+            source: "صحيح ابن حبان"
+        },
+
+        {
+            text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي، وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي.",
+            repeat: 1,
+            source: "سنن أبي داود"
+        },
+
+        {
+            text: "اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ الْكُفْرِ وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ.",
+            repeat: 3,
+            source: "سنن الترمذي"
+        },
+
+        {
+            text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَغَلَبَةِ الدَّيْنِ، وَقَهْرِ الرِّجَالِ.",
+            repeat: 1,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ.",
+            repeat: 1,
+            source: "سنن الترمذي"
+        },
+
+        {
+            text: "أَمْسَيْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَعَلَى كَلِمَةِ الْإِخْلَاصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ، حَنِيفًا مُسْلِمًا، وَمَا كَانَ مِنَ الْمُشْرِكِينَ.",
+            repeat: 1,
+            source: "سنن أبي داود"
+        },
+
+        {
+            text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.",
+            repeat: 100,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.",
+            repeat: 100,
+            source: "صحيح مسلم"
+        },
+
+        {
+            text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ.",
+            repeat: 3,
+            source: "صحيح مسلم"
+        },
+
+        {
+            text: "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ.",
+            repeat: 10,
+            source: "فضل الصلاة على النبي ﷺ"
+        },
+
+        {
+            text: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ رَبِّ الْعَالَمِينَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ هَذِهِ اللَّيْلَةِ: فَتْحَهَا، وَنَصْرَهَا، وَنُورَهَا، وَبَرَكَتَهَا، وَهُدَاهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِيهَا وَشَرِّ مَا بَعْدَهَا.",
+            repeat: 1,
+            source: "سنن أبي داود"
+        },
+
+        {
+            text: "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.",
+            repeat: 3,
+            source: "صحيح مسلم"
+        }
+
+    ],
+
+    sleep: [
+
+        {
+            text: "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
+            repeat: 1,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ",
+            repeat: 3,
+            source: "سنن الترمذي"
+        },
+
+        {
+            text: "اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ، وَوَجَّهْتُ وَجْهِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَغْبَةً وَرَهْبَةً إِلَيْكَ، لَا مَلْجَأَ وَلَا مَنْجَا مِنْكَ إِلَّا إِلَيْكَ، آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ، وَبِنَبِيِّكَ الَّذِي أَرْسَلْتَ",
+            repeat: 1,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "آيَةُ الْكُرْسِيِّ (البقرة 255)",
+            repeat: 1,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "سُورَةُ الْإِخْلَاصِ، سُورَةُ الْفَلَقِ، سُورَةُ النَّاسِ",
+            repeat: 3,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "اللَّهُمَّ خَلَقْتَ نَفْسِي وَأَنْتَ تَوَفَّاهَا، لَكَ مَمَاتُهَا وَمَحْيَاهَا، إِنْ أَحْيَيْتَهَا فَاحْفَظْهَا، وَإِنْ أَمَتَّهَا فَاغْفِرْ لَهَا، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ",
+            repeat: 1,
+            source: "صحيح مسلم"
+        },
+
+        {
+            text: "بِسْمِ اللَّهِ وَضَعْتُ جَنْبِي، اللَّهُمَّ اغْفِرْ لِي ذَنْبِي، وَأَخْسِئْ شَيْطَانِي، وَفُكَّ رِهَانِي، وَثَقِّلْ مِيزَانِي، وَاجْعَلْنِي فِي النَّدِيِّ الْأَعْلَى",
+            repeat: 1,
+            source: "سنن أبي داود"
+        },
+
+        {
+            text: "سُبْحَانَ اللَّهِ (٣٣)، الْحَمْدُ لِلَّهِ (٣٣)، اللَّهُ أَكْبَرُ (٣٤)",
+            repeat: 100,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "اللَّهُمَّ رَبَّ السَّمَوَاتِ وَرَبَّ الْأَرْضِ وَرَبَّ الْعَرْشِ الْعَظِيمِ، رَبَّنَا وَرَبَّ كُلَّ شَيْءٍ، فَالِقَ الْحَبِّ وَالنَّوَى، وَمُنْزِلَ التَّوْرَاةِ وَالْإِنْجِيلِ وَالْفُرْقَانِ، أَعُوذُ بِكَ مِنْ شَرِّ كُلِّ شَيْءٍ أَنْتَ آخِذٌ بِنَاصِيَتِهِ، اللَّهُمَّ أَنْتَ الْأَوَّلُ فَلَيْسَ قَبْلَكَ شَيْءٌ، وَأَنْتَ الْآخِرُ فَلَيْسَ بَعْدَكَ شَيْءٌ، وَأَنْتَ الظَّاهِرُ فَلَيْسَ فَوْقَكَ شَيْءٌ، وَأَنْتَ الْبَاطِنُ فَلَيْسَ دُونَكَ شَيْءٌ، اقْضِ عَنَّا الدَّيْنَ وَأَغْنِنَا مِنَ الْفَقْرِ",
+            repeat: 1,
+            source: "صحيح مسلم"
+        }
+
+    ],
+
+    wake: [
+
+        {
+            text: "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+            repeat: 1,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+            repeat: 1,
+            source: "صحيح البخاري"
+        },
+
+        {
+            text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ بِاسْمِكَ الَّذِي إِذَا دُعِيتَ بِهِ أَجَبْتَ، وَإِذَا سُئِلْتَ بِهِ أَعْطَيْتَ، أَنْ تَغْفِرَ لِي وَتَرْحَمَنِي",
+            repeat: 1,
+            source: "سنن الترمذي"
+        },
+
+        {
+            text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ",
+            repeat: 3,
+            source: "سنن الترمذي"
+        },
+
+        {
+            text: "اللَّهُمَّ لَا تَجْعَلْ فِي نَفْسِي شَيْئًا مِنْ هَذَا الْيَوْمِ إِلَّا غَفَرْتَهُ، وَلَا هَمًّا إِلَّا فَرَّجْتَهُ، وَلَا دَيْنًا إِلَّا قَضَيْتَهُ، وَلَا حَاجَةً إِلَّا قَضَيْتَهَا يَا أَرْحَمَ الرَّاحِمِينَ",
+            repeat: 1,
+            source: "دعاء مأثور"
+        },
+
+        {
+            text: "اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ",
+            repeat: 1,
+            source: "سنن الترمذي"
+        },
+
+        {
+            text: "الْحَمْدُ لِلَّهِ الَّذِي رَدَّ عَلَيَّ رُوحِي، وَعَافَانِي فِي جَسَدِي، وَأَذِنَ لِي بِذِكْرِهِ",
+            repeat: 1,
+            source: "سنن الترمذي"
+        }
+
+    ]
+
+};
+
+
+/* =========================================================
+   إعدادات التطبيق
+========================================================= */
+
+const STORAGE_KEY = "adhkar_app_v4";
+
+const sectionNames = {
+    morning: "أذكار الصباح",
+    evening: "أذكار المساء",
+    sleep: "أذكار النوم",
+    wake: "أذكار الاستيقاظ"
+};
+
+const sectionIcons = {
+    morning: "🌅",
+    evening: "🌇",
+    sleep: "🌙",
+    wake: "☀️"
+};
+
+
+/* =========================================================
+   الحالة
+========================================================= */
+
+let state = {
+
+    section: "morning",
+
+    index: 0,
+
+    counters: {},
+
+    countersDate: "",
+
+    theme: "olive",
+
+    font: "'Noto Naskh Arabic', serif",
+
+    dailyActivity: {}
+
+};
+
+
+/* =========================================================
+   التاريخ والتقويم الزمني الدقيق
+   الاعتماد على تاريخ الجهاز المحلي مع عمليات حسابية آمنة
+========================================================= */
+
+function dateKey(date = new Date()) {
+
+    const y = date.getFullYear();
+
+    const m =
+        String(date.getMonth() + 1)
+        .padStart(2, "0");
+
+    const d =
+        String(date.getDate())
+        .padStart(2, "0");
+
+    return `${y}-${m}-${d}`;
+
+}
+
+
+function dayNumber(key) {
+
+    if (!key || typeof key !== "string") {
+
+        return NaN;
+
+    }
+
+    const parts =
+        key.split("-").map(Number);
+
+    if (
+        parts.length !== 3 ||
+        parts.some(
+            n => !Number.isFinite(n)
+        )
+    ) {
+
+        return NaN;
+
+    }
+
+    return Math.floor(
+        Date.UTC(
+            parts[0],
+            parts[1] - 1,
+            parts[2]
+        ) / 86400000
+    );
+
+}
+
+
+function daysBetween(
+    olderKey,
+    newerKey
+) {
+
+    const a =
+        dayNumber(olderKey);
+
+    const b =
+        dayNumber(newerKey);
+
+    if (
+        !Number.isFinite(a) ||
+        !Number.isFinite(b)
+    ) {
+
+        return NaN;
+
+    }
+
+    return b - a;
+
+}
+
+
+function addDays(
+    key,
+    amount
+) {
+
+    const parts =
+        String(key)
+        .split("-")
+        .map(Number);
+
+    if (
+        parts.length !== 3 ||
+        parts.some(n => !Number.isFinite(n))
+    ) {
+
+        return key;
+
+    }
+
+    const utcMs =
+        Date.UTC(
+            parts[0],
+            parts[1] - 1,
+            parts[2]
+        ) + (amount * 86400000);
+
+    const d = new Date(utcMs);
+
+    const y = d.getUTCFullYear();
+
+    const m =
+        String(d.getUTCMonth() + 1)
+        .padStart(2, "0");
+
+    const day =
+        String(d.getUTCDate())
+        .padStart(2, "0");
+
+    return `${y}-${m}-${day}`;
+
+}
+
+
+/* =========================================================
+   الأرقام
+========================================================= */
+
+function arabicNumber(number) {
+
+    return String(number);
+
+}
+
+
+/* =========================================================
+   التحقق من تصفير عدادات التكرار في يوم جديد
+========================================================= */
+
+function checkAndResetDailyCounters() {
+
+    const today = dateKey();
+
+    if (state.countersDate !== today) {
+
+        state.counters = {};
+
+        state.countersDate = today;
+
+        saveState();
+
+    }
+
+}
+
+
+/* =========================================================
+   تحميل الحالة
+========================================================= */
+
+function loadState() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                STORAGE_KEY
+            );
+
+        if (saved) {
+
+            const parsed =
+                JSON.parse(saved);
+
+            state = {
+                ...state,
+                ...parsed,
+                counters:
+                    parsed.counters || {},
+                countersDate:
+                    parsed.countersDate || "",
+                dailyActivity:
+                    parsed.dailyActivity || {}
+            };
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "تعذر تحميل البيانات",
+            error
+        );
+
+    }
+
+
+    if (!adhkarData[state.section]) {
+
+        state.section =
+            "morning";
+
+    }
+
+
+    if (
+        !Number.isInteger(
+            state.index
+        ) ||
+        state.index < 0 ||
+        state.index >=
+            adhkarData[
+                state.section
+            ].length
+    ) {
+
+        state.index = 0;
+
+    }
+
+
+    const today = dateKey();
+
+    // إذا كان يوماً جديداً، يتم تصفير عدادات التكرار اليومية لبدء يوم جديد
+    if (!state.countersDate) {
+
+        state.countersDate = today;
+
+    } else if (state.countersDate !== today) {
+
+        state.counters = {};
+
+        state.countersDate = today;
+
+    }
+
+
+    const normalizedActivity = {};
+
+    if (
+        state.dailyActivity &&
+        typeof state.dailyActivity ===
+            "object"
+    ) {
+
+        Object.entries(
+            state.dailyActivity
+        )
+        .forEach(
+            ([key, value]) => {
+
+                if (
+                    value === true ||
+                    Number(value) > 0
+                ) {
+
+                    normalizedActivity[key] = {
+                        morning: false,
+                        evening: false,
+                        sleep: false,
+                        wake: false,
+                        general: true
+                    };
+
+                }
+
+                else if (
+                    value &&
+                    typeof value ===
+                        "object"
+                ) {
+
+                    normalizedActivity[key] = {
+                        morning:
+                            value.morning === true,
+                        evening:
+                            value.evening === true,
+                        sleep:
+                            value.sleep === true,
+                        wake:
+                            value.wake === true,
+                        general:
+                            value.general === true ||
+                            value.morning === true ||
+                            value.evening === true ||
+                            value.sleep === true ||
+                            value.wake === true
+                    };
+
+                }
+
+            }
+        );
+
+    }
+
+    state.dailyActivity =
+        normalizedActivity;
+
+
+    const validThemes = [
+        "olive",
+        "night",
+        "gold",
+        "rose",
+        "sand"
+    ];
+
+    if (
+        !validThemes.includes(
+            state.theme
+        )
+    ) {
+
+        state.theme =
+            "olive";
+
+    }
+
+
+    document.body.className =
+        "theme-" + state.theme;
+
+
+    document.body.style.fontFamily =
+        state.font;
+
+
+    updateThemeButtons();
+
+
+    const fontSelect =
+        document.getElementById(
+            "fontSelect"
+        );
+
+    if (fontSelect) {
+
+        fontSelect.value =
+            state.font;
+
+    }
+
+
+    saveState();
+
+}
+
+
+/* =========================================================
+   حفظ الحالة
+========================================================= */
+
+function saveState() {
+
+    try {
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(state)
+        );
+
+    } catch (error) {
+
+        console.warn(
+            "تعذر حفظ البيانات",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const tabs =
+    document.querySelectorAll(".tab");
+
+const dhikrCard =
+    document.getElementById("dhikrCard");
+
+const dhikrText =
+    document.getElementById("dhikrText");
+
+const dhikrSource =
+    document.getElementById("dhikrSource");
+
+const dhikrNumber =
+    document.getElementById("dhikrNumber");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+const progressText =
+    document.getElementById("progressText");
+
+const progressPercent =
+    document.getElementById(
+        "progressPercent"
+    );
+
+const circle =
+    document.getElementById("circle");
+
+const circleProgress =
+    document.getElementById(
+        "circleProgress"
+    );
+
+const circleCount =
+    document.getElementById(
+        "circleCount"
+    );
+
+const counterBtn =
+    document.getElementById(
+        "counterBtn"
+    );
+
+const counterHint =
+    document.getElementById(
+        "counterHint"
+    );
+
+const prevBtn =
+    document.getElementById(
+        "prevBtn"
+    );
+
+const nextBtn =
+    document.getElementById(
+        "nextBtn"
+    );
+
+const completion =
+    document.getElementById(
+        "completion"
+    );
+
+const completionText =
+    document.getElementById(
+        "completionText"
+    );
+
+const settingsBtn =
+    document.getElementById(
+        "settingsBtn"
+    );
+
+const settingsPanel =
+    document.getElementById(
+        "settingsPanel"
+    );
+
+const streakBtn =
+    document.getElementById(
+        "streakBtn"
+    );
+
+const streakPanel =
+    document.getElementById(
+        "streakPanel"
+    );
+
+const overlay =
+    document.getElementById(
+        "overlay"
+    );
+
+const toast =
+    document.getElementById(
+        "toast"
+    );
+
+
+/* =========================================================
+   أدوات البيانات
+========================================================= */
+
+function currentList() {
+
+    return adhkarData[
+        state.section
+    ];
+
+}
+
+
+function counterKey(section = state.section, index = state.index) {
+
+    return (
+        section +
+        "_" +
+        index
+    );
+
+}
+
+
+function currentCounter() {
+
+    const value =
+        Number(
+            state.counters[
+                counterKey()
+            ] || 0
+        );
+
+    const target =
+        Number(
+            currentDhikr().repeat
+        );
+
+    return Math.min(
+        value,
+        target
+    );
+
+}
+
+
+function currentDhikr() {
+
+    return currentList()[
+        state.index
+    ];
+
+}
+
+
+/* =========================================================
+   هل الذكر مكتمل؟
+========================================================= */
+
+function isCurrentDhikrComplete() {
+
+    return (
+        currentCounter() >=
+        currentDhikr().repeat
+    );
+
+}
+
+
+/* =========================================================
+   هل القسم مكتمل؟
+========================================================= */
+
+function isCurrentSectionComplete(section = state.section) {
+
+    const list =
+        adhkarData[section];
+
+    if (!list || !list.length) {
+
+        return false;
+
+    }
+
+    return list.every(
+        (item, index) => {
+
+            const count =
+                Number(
+                    state.counters[
+                        section +
+                        "_" +
+                        index
+                    ] || 0
+                );
+
+            return count >=
+                Number(item.repeat);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   إنشاء نشاط يوم
+========================================================= */
+
+function ensureActivityDay(key) {
+
+    if (
+        !state.dailyActivity[key] ||
+        typeof state.dailyActivity[key] !==
+            "object"
+    ) {
+
+        state.dailyActivity[key] = {
+            morning: false,
+            evening: false,
+            sleep: false,
+            wake: false,
+            general: false
+        };
+
+    }
+
+    return state.dailyActivity[key];
+
+}
+
+
+/* =========================================================
+   تسجيل إكمال قسم اليوم
+   يتم احتساب اليوم مرة واحدة فقط لكل قسم
+========================================================= */
+
+function markSectionComplete(section) {
+
+    if (
+        !sectionNames[section]
+    ) {
+
+        return false;
+
+    }
+
+    const today =
+        dateKey();
+
+    const activity =
+        ensureActivityDay(today);
+
+    const wasAlreadyCompleted =
+        activity[section] === true;
+
+    activity[section] = true;
+
+    activity.general = true;
+
+    saveState();
+
+    updateStreakUI();
+
+    return !wasAlreadyCompleted;
+
+}
+
+
+/* =========================================================
+   هل قسم نشط في يوم؟
+========================================================= */
+
+function isSectionDayActive(
+    key,
+    section
+) {
+
+    const activity =
+        state.dailyActivity &&
+        state.dailyActivity[key];
+
+    if (!activity) {
+
+        return false;
+
+    }
+
+    if (
+        activity === true
+    ) {
+
+        return section ===
+            "general";
+
+    }
+
+    return activity[section] === true;
+
+}
+
+
+/* =========================================================
+   هل يوجد نشاط عام؟
+========================================================= */
+
+function isGeneralDayActive(key) {
+
+    const activity =
+        state.dailyActivity &&
+        state.dailyActivity[key];
+
+    if (!activity) {
+
+        return false;
+
+    }
+
+    if (
+        activity === true
+    ) {
+
+        return true;
+
+    }
+
+    return activity.general === true ||
+        activity.morning === true ||
+        activity.evening === true ||
+        activity.sleep === true ||
+        activity.wake === true;
+
+}
+
+
+/* =========================================================
+   آخر يوم نشط لقسم معين
+========================================================= */
+
+function getLastSectionActiveDay(
+    section
+) {
+
+    const today =
+        dateKey();
+
+    const dates =
+        Object.keys(
+            state.dailyActivity || {}
+        )
+        .filter(
+            key => {
+
+                if (
+                    !/^\d{4}-\d{2}-\d{2}$/.test(key)
+                ) {
+
+                    return false;
+
+                }
+
+                if (
+                    key > today
+                ) {
+
+                    return false;
+
+                }
+
+                return isSectionDayActive(
+                    key,
+                    section
+                );
+
+            }
+        )
+        .sort(
+            (a, b) => dayNumber(a) - dayNumber(b)
+        );
+
+    if (!dates.length) {
+
+        return null;
+
+    }
+
+    return dates[
+        dates.length - 1
+    ];
+
+}
+
+
+/* =========================================================
+   آخر يوم نشط عام
+========================================================= */
+
+function getLastGeneralActiveDay() {
+
+    const today =
+        dateKey();
+
+    const dates =
+        Object.keys(
+            state.dailyActivity || {}
+        )
+        .filter(
+            key => {
+
+                if (
+                    !/^\d{4}-\d{2}-\d{2}$/.test(key)
+                ) {
+
+                    return false;
+
+                }
+
+                if (
+                    key > today
+                ) {
+
+                    return false;
+
+                }
+
+                return isGeneralDayActive(
+                    key
+                );
+
+            }
+        )
+        .sort(
+            (a, b) => dayNumber(a) - dayNumber(b)
+        );
+
+    if (!dates.length) {
+
+        return null;
+
+    }
+
+    return dates[
+        dates.length - 1
+    ];
+
+}
+
+
+/* =========================================================
+   حساب Streak لقسم
+   - إذا تم إكمال أذكار اليوم، يبدأ العد من اليوم ويرجع للخلف
+   - إذا لم تكتمل أذكار اليوم ولكن الأمس كان مكتملاً، يحافظ على استمرار الأمس
+   - إذا انقطع يوم كامل أو أكثر (diff > 1)، يعود العداد إلى 0
+========================================================= */
+
+function calculateSectionStreak(
+    section
+) {
+
+    const today =
+        dateKey();
+
+    const lastActive =
+        getLastSectionActiveDay(
+            section
+        );
+
+    if (!lastActive) {
+
+        return 0;
+
+    }
+
+    const difference =
+        daysBetween(
+            lastActive,
+            today
+        );
+
+    // إذا كان آخر نشاط في المستقبل أو انقطع أكثر من يوم، ينتهي الاستمرار
+    if (
+        !Number.isFinite(
+            difference
+        ) ||
+        difference < 0 ||
+        difference > 1
+    ) {
+
+        return 0;
+
+    }
+
+    let streak = 0;
+
+    let cursor =
+        lastActive;
+
+    while (
+        isSectionDayActive(
+            cursor,
+            section
+        )
+    ) {
+
+        streak++;
+
+        cursor =
+            addDays(
+                cursor,
+                -1
+            );
+
+    }
+
+    return streak;
+
+}
+
+
+/* =========================================================
+   حساب Streak العام
+   - يزداد العداد بمقدار يوم عند إكمال الأذكار في يومين متتاليين
+   - يعود إلى الصفر عند انقطاع يوم كامل، ثم يبدأ سلسلة جديدة عند الإكمال
+========================================================= */
+
+function calculateGeneralStreak() {
+
+    const today =
+        dateKey();
+
+    const lastActive =
+        getLastGeneralActiveDay();
+
+    if (!lastActive) {
+
+        return 0;
+
+    }
+
+    const difference =
+        daysBetween(
+            lastActive,
+            today
+        );
+
+    if (
+        !Number.isFinite(
+            difference
+        ) ||
+        difference < 0 ||
+        difference > 1
+    ) {
+
+        return 0;
+
+    }
+
+    let streak = 0;
+
+    let cursor =
+        lastActive;
+
+    while (
+        isGeneralDayActive(
+            cursor
+        )
+    ) {
+
+        streak++;
+
+        cursor =
+            addDays(
+                cursor,
+                -1
+            );
+
+    }
+
+    return streak;
+
+}
+
+
+/* =========================================================
+   آخر نشاط عام
+========================================================= */
+
+function getLastActiveDay() {
+
+    return getLastGeneralActiveDay();
+
+}
+
+
+/* =========================================================
+   تنسيق التاريخ
+========================================================= */
+
+function formatStreakDate(key) {
+
+    if (!key) {
+
+        return "—";
+
+    }
+
+    const parts =
+        key.split("-");
+
+    if (
+        parts.length !== 3
+    ) {
+
+        return key;
+
+    }
+
+    return (
+        arabicNumber(parts[2]) +
+        "/" +
+        arabicNumber(parts[1]) +
+        "/" +
+        arabicNumber(parts[0])
+    );
+
+}
+
+
+/* =========================================================
+   تحديث Streak لقسم
+========================================================= */
+
+function updateSectionStreakUI(
+    section
+) {
+
+    const streak =
+        calculateSectionStreak(
+            section
+        );
+
+    const today =
+        dateKey();
+
+    const activeToday =
+        isSectionDayActive(
+            today,
+            section
+        );
+
+    const numberElement =
+        document.getElementById(
+            section +
+            "StreakNumber"
+        );
+
+    const statusElement =
+        document.getElementById(
+            section +
+            "StreakStatus"
+        );
+
+    if (numberElement) {
+
+        numberElement.textContent =
+            arabicNumber(streak);
+
+    }
+
+    if (statusElement) {
+
+        statusElement.classList.toggle(
+            "active",
+            activeToday
+        );
+
+        statusElement.textContent =
+            activeToday
+                ? "مكتمل اليوم ✓"
+                : "غير مكتمل اليوم";
+
+    }
+
+}
+
+
+/* =========================================================
+   تحديث واجهة الـStreak مباشرة في DOM
+========================================================= */
+
+function updateStreakUI() {
+
+    const generalStreak =
+        calculateGeneralStreak();
+
+    const today =
+        dateKey();
+
+    const lastActive =
+        getLastGeneralActiveDay();
+
+    const isTodayActive =
+        isGeneralDayActive(today);
+
+    const generalNumber =
+        document.getElementById(
+            "generalStreakNumber"
+        );
+
+    if (generalNumber) {
+
+        generalNumber.textContent =
+            arabicNumber(
+                generalStreak
+            );
+
+    }
+
+    updateSectionStreakUI(
+        "morning"
+    );
+
+    updateSectionStreakUI(
+        "evening"
+    );
+
+    updateSectionStreakUI(
+        "sleep"
+    );
+
+    updateSectionStreakUI(
+        "wake"
+    );
+
+    const streakToday =
+        document.getElementById(
+            "streakToday"
+        );
+
+    const lastActiveDay =
+        document.getElementById(
+            "lastActiveDay"
+        );
+
+    const message =
+        document.getElementById(
+            "streakMessage"
+        );
+
+    if (streakToday) {
+
+        streakToday.textContent =
+            isTodayActive
+                ? "نشط ومكتمل اليوم ✓"
+                : "لم تكتمل أذكار اليوم بعد";
+
+    }
+
+    if (lastActiveDay) {
+
+        lastActiveDay.textContent =
+            formatStreakDate(
+                lastActive
+            );
+
+    }
+
+    if (message) {
+
+        if (
+            generalStreak === 0
+        ) {
+
+            message.textContent =
+                "ابدأ وأكمل أي قسم من أذكارك اليوم لبدء سلسلة استمرار جديدة 🌿";
+
+        }
+
+        else if (
+            generalStreak === 1
+        ) {
+
+            message.textContent =
+                isTodayActive
+                    ? "أحسنت! بداية موفقة 🌿 حافظ على أذكارك غدًا لزيادة الاستمرار."
+                    : "لديك استمرار ليوم واحد 🌿 أكمل أذكار اليوم للمحافظة على السلسلة.";
+
+        }
+
+        else {
+
+            message.textContent =
+                isTodayActive
+                    ? "ما شاء الله! أنت مستمر منذ " +
+                      arabicNumber(generalStreak) +
+                      " أيام متتالية 🔥"
+                    : "أنت مستمر منذ " +
+                      arabicNumber(generalStreak) +
+                      " أيام 🔥 أكمل أذكار اليوم لمواصلة السلسلة!";
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   عرض الذكر
+========================================================= */
+
+function render() {
+
+    const list =
+        currentList();
+
+    if (
+        !list ||
+        !list.length
+    ) {
+
+        return;
+
+    }
+
+    if (
+        state.index < 0 ||
+        state.index >= list.length
+    ) {
+
+        state.index = 0;
+
+    }
+
+    const item =
+        currentDhikr();
+
+    completion.classList.remove(
+        "show"
+    );
+
+    dhikrCard.style.display =
+        "block";
+
+    dhikrNumber.textContent =
+        "الذكر " +
+        arabicNumber(state.index + 1) +
+        " من " +
+        arabicNumber(list.length);
+
+    dhikrText.classList.remove(
+        "fade-in"
+    );
+
+    const renderText =
+        function() {
+
+            dhikrText.textContent =
+                item.text;
+
+            dhikrSource.textContent =
+                item.source;
+
+            dhikrText.classList.add(
+                "fade-in"
+            );
+
+        };
+
+    if (
+        typeof requestAnimationFrame ===
+        "function"
+    ) {
+
+        requestAnimationFrame(
+            renderText
+        );
+
+    }
+
+    else {
+
+        setTimeout(
+            renderText,
+            0
+        );
+
+    }
+
+    updateTopProgress();
+
+    updateCircle();
+
+    prevBtn.disabled =
+        state.index === 0;
+
+    nextBtn.textContent =
+        state.index ===
+        list.length - 1
+            ? "إنهاء ✓"
+            : "التالي ←";
+
+    saveState();
+
+}
+
+
+/* =========================================================
+   التقدم العلوي
+========================================================= */
+
+function updateTopProgress() {
+
+    const list =
+        currentList();
+
+    const percent =
+        (
+            (state.index + 1) /
+            list.length
+        ) * 100;
+
+    progressBar.style.width =
+        percent + "%";
+
+    progressText.textContent =
+        "الذكر " +
+        arabicNumber(state.index + 1) +
+        " من " +
+        arabicNumber(list.length);
+
+    progressPercent.textContent =
+        Math.round(percent) + "%";
+
+}
+
+
+/* =========================================================
+   دائرة التكرار
+========================================================= */
+
+function updateCircle() {
+
+    const item =
+        currentDhikr();
+
+    if (!item) {
+
+        return;
+
+    }
+
+    const target =
+        Number(item.repeat) || 1;
+
+    const count =
+        Math.min(
+            currentCounter(),
+            target
+        );
+
+    const percent =
+        target === 0
+            ? 0
+            : (count / target) * 100;
+
+    const radius = 50;
+
+    const circumference =
+        2 * Math.PI * radius;
+
+    circleProgress.style.strokeDasharray =
+        circumference;
+
+    circleProgress.style.strokeDashoffset =
+        circumference -
+        (
+            (percent / 100) *
+            circumference
+        );
+
+    circleCount.textContent =
+        arabicNumber(count) +
+        "/" +
+        arabicNumber(target);
+
+    circle.classList.toggle(
+        "complete",
+        count >= target
+    );
+
+    if (
+        count >= target
+    ) {
+
+        counterHint.textContent =
+            "تم إكمال التكرارات ✓";
+
+    }
+
+    else {
+
+        counterHint.textContent =
+            "المتبقي " +
+            arabicNumber(
+                target - count
+            ) +
+            " تكرار";
+
+    }
+
+    counterBtn.disabled =
+        count >= target;
+
+}
+
+
+/* =========================================================
+   زر التكرار
+========================================================= */
+
+function repeatCurrentDhikr() {
+
+    checkAndResetDailyCounters();
+
+    const item =
+        currentDhikr();
+
+    if (!item) {
+
+        return;
+
+    }
+
+    const key =
+        counterKey();
+
+    const oldCount =
+        Number(
+            state.counters[key] || 0
+        );
+
+    const target =
+        Number(item.repeat) || 1;
+
+    if (
+        oldCount >= target
+    ) {
+
+        return;
+
+    }
+
+    state.counters[key] =
+        oldCount + 1;
+
+    saveState();
+
+    updateCircle();
+
+    // التحقق مما إذا كان هذا التكرار قد أكمل جميع أذكار القسم
+    if (isCurrentSectionComplete()) {
+
+        const isNewCompletion =
+            markSectionComplete(state.section);
+
+        if (isNewCompletion) {
+
+            showToast(
+                "أحسنت! أتممت " +
+                sectionNames[state.section] +
+                " لليوم وتحدث عداد الاستمرار 🔥"
+            );
+
+        }
+
+    }
+
+    updateStreakUI();
+
+}
+
+
+/* =========================================================
+   الانتقال التالي
+========================================================= */
+
+function goNext() {
+
+    const list =
+        currentList();
+
+    if (
+        state.index <
+        list.length - 1
+    ) {
+
+        state.index++;
+
+        animateChange();
+
+        return;
+
+    }
+
+    if (
+        isCurrentSectionComplete()
+    ) {
+
+        completeSection();
+
+    }
+
+    else {
+
+        showToast(
+            "أكمل جميع التكرارات أولًا 🌿"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   الانتقال السابق
+========================================================= */
+
+function goPrev() {
+
+    if (
+        state.index > 0
+    ) {
+
+        state.index--;
+
+        animateChange();
+
+    }
+
+}
+
+
+/* =========================================================
+   تغيير الذكر
+========================================================= */
+
+function animateChange() {
+
+    dhikrText.classList.remove(
+        "fade-in"
+    );
+
+    dhikrCard.classList.add(
+        "fade-out"
+    );
+
+    setTimeout(
+        function() {
+
+            dhikrCard.classList.remove(
+                "fade-out"
+            );
+
+            render();
+
+        },
+        180
+    );
+
+}
+
+
+/* =========================================================
+   تغيير القسم
+========================================================= */
+
+function changeSection(section) {
+
+    if (
+        !adhkarData[section]
+    ) {
+
+        return;
+
+    }
+
+    state.section =
+        section;
+
+    state.index =
+        0;
+
+    tabs.forEach(
+        function(tab) {
+
+            tab.classList.toggle(
+                "active",
+                tab.getAttribute(
+                    "data-section"
+                ) === section
+            );
+
+        }
+    );
+
+    dhikrCard.style.display =
+        "block";
+
+    completion.classList.remove(
+        "show"
+    );
+
+    saveState();
+
+    render();
+
+}
+
+
+/* =========================================================
+   إكمال القسم
+========================================================= */
+
+function completeSection() {
+
+    if (
+        !isCurrentSectionComplete()
+    ) {
+
+        showToast(
+            "لم يكتمل القسم بعد 🌿"
+        );
+
+        return;
+
+    }
+
+    // تسجيل إكمال القسم لليوم وتحديث أيام الاستمرار
+    markSectionComplete(state.section);
+
+    dhikrCard.style.display =
+        "none";
+
+    completion.classList.add(
+        "show"
+    );
+
+    completionText.textContent =
+        "أتممت " +
+        sectionNames[state.section] +
+        " كاملةً. تقبّل الله منك 🌿";
+
+    updateStreakUI();
+
+}
+
+
+/* =========================================================
+   إعادة القسم
+   تصفير عدادات القسم الحالي فقط للسماح بالقراءة مرة أخرى
+   دون التأثير على استمرار اليوم
+========================================================= */
+
+function restartCurrentSection() {
+
+    const list = currentList();
+
+    if (list) {
+
+        list.forEach((_, i) => {
+
+            delete state.counters[
+                counterKey(state.section, i)
+            ];
+
+        });
+
+    }
+
+    state.index = 0;
+
+    dhikrCard.style.display =
+        "block";
+
+    completion.classList.remove(
+        "show"
+    );
+
+    saveState();
+
+    render();
+
+}
+
+
+/* =========================================================
+   فتح الإعدادات
+========================================================= */
+
+function openSettings() {
+
+    settingsPanel.classList.add(
+        "show"
+    );
+
+    overlay.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   فتح Streak
+========================================================= */
+
+function openStreak() {
+
+    checkAndResetDailyCounters();
+
+    updateStreakUI();
+
+    streakPanel.classList.add(
+        "show"
+    );
+
+    overlay.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   إغلاق النوافذ
+========================================================= */
+
+function closePanels() {
+
+    settingsPanel.classList.remove(
+        "show"
+    );
+
+    streakPanel.classList.remove(
+        "show"
+    );
+
+    overlay.classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   الثيمات
+========================================================= */
+
+function setTheme(theme) {
+
+    const validThemes = [
+        "olive",
+        "night",
+        "gold",
+        "rose",
+        "sand"
+    ];
+
+    if (
+        !validThemes.includes(theme)
+    ) {
+
+        return;
+
+    }
+
+    state.theme =
+        theme;
+
+    document.body.className =
+        "theme-" +
+        theme;
+
+    updateThemeButtons();
+
+    saveState();
+
+}
+
+
+function updateThemeButtons() {
+
+    document
+        .querySelectorAll(
+            ".theme-option"
+        )
+        .forEach(
+            function(button) {
+
+                button.classList.toggle(
+                    "active",
+                    button.getAttribute(
+                        "data-theme"
+                    ) ===
+                    state.theme
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   الخط
+========================================================= */
+
+function setFont(font) {
+
+    if (!font) {
+
+        return;
+
+    }
+
+    state.font =
+        font;
+
+    document.body.style.fontFamily =
+        state.font;
+
+    saveState();
+
+}
+
+
+/* =========================================================
+   حذف التقدم
+========================================================= */
+
+function resetProgress() {
+
+    let confirmed = false;
+
+    try {
+
+        confirmed =
+            confirm(
+                "هل أنت متأكد؟ سيتم حذف التقدم وأيام الاستمرار بالكامل."
+            );
+
+    } catch (error) {
+
+        confirmed = false;
+
+    }
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+    try {
+
+        localStorage.removeItem(
+            STORAGE_KEY
+        );
+
+    } catch (error) {
+
+        console.warn(
+            "تعذر حذف البيانات",
+            error
+        );
+
+    }
+
+    try {
+
+        location.reload();
+
+    } catch (error) {
+
+        state = {
+            section: "morning",
+            index: 0,
+            counters: {},
+            countersDate: dateKey(),
+            theme: "olive",
+            font: "'Noto Naskh Arabic', serif",
+            dailyActivity: {}
+        };
+
+        document.body.className =
+            "theme-olive";
+
+        render();
+
+        updateStreakUI();
+
+    }
+
+}
+
+
+/* =========================================================
+   Toast
+========================================================= */
+
+let toastTimer = null;
+
+function showToast(message) {
+
+    if (!toast) {
+
+        return;
+
+    }
+
+    toast.textContent =
+        message;
+
+    toast.classList.add(
+        "show"
+    );
+
+    if (toastTimer) {
+
+        clearTimeout(
+            toastTimer
+        );
+
+    }
+
+    toastTimer =
+        setTimeout(
+            function() {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2200
+        );
+
+}
+
+
+/* =========================================================
+   السحب على الهاتف
+========================================================= */
+
+let touchStartX = 0;
+
+let touchStartY = 0;
+
+let touchStartTime = 0;
+
+let touchStarted = false;
+
+
+dhikrCard.addEventListener(
+    "touchstart",
+    function(event) {
+
+        if (
+            !event.changedTouches ||
+            !event.changedTouches.length
+        ) {
+
+            return;
+
+        }
+
+        const touch =
+            event.changedTouches[0];
+
+        touchStartX =
+            touch.clientX;
+
+        touchStartY =
+            touch.clientY;
+
+        touchStartTime =
+            Date.now();
+
+        touchStarted =
+            true;
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+dhikrCard.addEventListener(
+    "touchend",
+    function(event) {
+
+        if (
+            !touchStarted ||
+            !event.changedTouches ||
+            !event.changedTouches.length
+        ) {
+
+            return;
+
+        }
+
+        touchStarted =
+            false;
+
+        const touch =
+            event.changedTouches[0];
+
+        const deltaX =
+            touch.clientX -
+            touchStartX;
+
+        const deltaY =
+            touch.clientY -
+            touchStartY;
+
+        const duration =
+            Date.now() -
+            touchStartTime;
+
+        if (
+            duration < 600 &&
+            Math.abs(deltaX) > 60 &&
+            Math.abs(deltaX) >
+                Math.abs(deltaY) * 1.3
+        ) {
+
+            if (
+                deltaX < 0
+            ) {
+
+                goNext();
+
+            }
+
+            else {
+
+                goPrev();
+
+            }
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* =========================================================
+   نظام الأزرار المركزي
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        let target =
+            event.target;
+
+        if (
+            target &&
+            target.nodeType === 3
+        ) {
+
+            target =
+                target.parentElement;
+
+        }
+
+
+        /* =========================
+           زر التكرار
+        ========================= */
+
+        if (
+            target &&
+            (
+                target.id === "counterBtn" ||
+                (
+                    target.closest &&
+                    target.closest(
+                        "#counterBtn"
+                    )
+                )
+            )
+        ) {
+
+            event.preventDefault();
+
+            repeatCurrentDhikr();
+
+            return;
+
+        }
+
+
+        /* =========================
+           التالي
+        ========================= */
+
+        if (
+            target &&
+            (
+                target.id === "nextBtn" ||
+                (
+                    target.closest &&
+                    target.closest(
+                        "#nextBtn"
+                    )
+                )
+            )
+        ) {
+
+            event.preventDefault();
+
+            goNext();
+
+            return;
+
+        }
+
+
+        /* =========================
+           السابق
+        ========================= */
+
+        if (
+            target &&
+            (
+                target.id === "prevBtn" ||
+                (
+                    target.closest &&
+                    target.closest(
+                        "#prevBtn"
+                    )
+                )
+            )
+        ) {
+
+            event.preventDefault();
+
+            goPrev();
+
+            return;
+
+        }
+
+
+        /* =========================
+           إعادة القسم
+        ========================= */
+
+        if (
+            target &&
+            (
+                target.id === "restartBtn" ||
+                (
+                    target.closest &&
+                    target.closest(
+                        "#restartBtn"
+                    )
+                )
+            )
+        ) {
+
+            event.preventDefault();
+
+            restartCurrentSection();
+
+            return;
+
+        }
+
+
+        /* =========================
+           الإعدادات
+        ========================= */
+
+        if (
+            target &&
+            (
+                target.id === "settingsBtn" ||
+                (
+                    target.closest &&
+                    target.closest(
+                        "#settingsBtn"
+                    )
+                )
+            )
+        ) {
+
+            event.preventDefault();
+
+            openSettings();
+
+            return;
+
+        }
+
+
+        /* =========================
+           Streak
+        ========================= */
+
+        if (
+            target &&
+            (
+                target.id === "streakBtn" ||
+                (
+                    target.closest &&
+                    target.closest(
+                        "#streakBtn"
+                    )
+                )
+            )
+        ) {
+
+            event.preventDefault();
+
+            openStreak();
+
+            return;
+
+        }
+
+
+        /* =========================
+           إغلاق الإعدادات
+        ========================= */
+
+        if (
+            target &&
+            (
+                target.id === "closeSettings" ||
+                (
+                    target.closest &&
+                    target.closest(
+                        "#closeSettings"
+                    )
+                )
+            )
+        ) {
+
+            event.preventDefault();
+
+            closePanels();
+
+            return;
+
+        }
+
+
+        /* =========================
+           إغلاق Streak
+        ========================= */
+
+        if (
+            target &&
+            (
+                target.id === "closeStreak" ||
+                (
+                    target.closest &&
+                    target.closest(
+                        "#closeStreak"
+                    )
+                )
+            )
+        ) {
+
+            event.preventDefault();
+
+            closePanels();
+
+            return;
+
+        }
+
+
+        /* =========================
+           Overlay
+        ========================= */
+
+        if (
+            target &&
+            (
+                target.id === "overlay" ||
+                (
+                    target.closest &&
+                    target.closest(
+                        "#overlay"
+                    )
+                )
+            )
+        ) {
+
+            event.preventDefault();
+
+            closePanels();
+
+            return;
+
+        }
+
+
+        /* =========================
+           الأقسام
+        ========================= */
+
+        let sectionButton = null;
+
+        if (
+            target &&
+            target.classList &&
+            target.classList.contains(
+                "tab"
+            )
+        ) {
+
+            sectionButton =
+                target;
+
+        }
+
+        else if (
+            target &&
+            target.closest
+        ) {
+
+            sectionButton =
+                target.closest(
+                    ".tab"
+                );
+
+        }
+
+        if (sectionButton) {
+
+            event.preventDefault();
+
+            const section =
+                sectionButton.getAttribute(
+                    "data-section"
+                );
+
+            changeSection(
+                section
+            );
+
+            return;
+
+        }
+
+
+        /* =========================
+           الثيمات
+        ========================= */
+
+        let themeButton = null;
+
+        if (
+            target &&
+            target.classList &&
+            target.classList.contains(
+                "theme-option"
+            )
+        ) {
+
+            themeButton =
+                target;
+
+        }
+
+        else if (
+            target &&
+            target.closest
+        ) {
+
+            themeButton =
+                target.closest(
+                    ".theme-option"
+                );
+
+        }
+
+        if (themeButton) {
+
+            event.preventDefault();
+
+            const theme =
+                themeButton.getAttribute(
+                    "data-theme"
+                );
+
+            setTheme(theme);
+
+            return;
+
+        }
+
+
+        /* =========================
+           حذف التقدم
+        ========================= */
+
+        if (
+            target &&
+            (
+                target.id === "resetBtn" ||
+                (
+                    target.closest &&
+                    target.closest(
+                        "#resetBtn"
+                    )
+                )
+            )
+        ) {
+
+            event.preventDefault();
+
+            resetProgress();
+
+            return;
+
+        }
+
+    },
+    false
+);
+
+
+/* =========================================================
+   تغيير الخط
+========================================================= */
+
+const fontSelect =
+    document.getElementById(
+        "fontSelect"
+    );
+
+if (fontSelect) {
+
+    fontSelect.addEventListener(
+        "change",
+        function(event) {
+
+            setFont(
+                event.target.value
+            );
+
+        },
+        false
+    );
+
+}
+
+
+/* =========================================================
+   لوحة المفاتيح
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        const target =
+            event.target;
+
+        if (
+            target &&
+            (
+                target.tagName === "INPUT" ||
+                target.tagName === "SELECT" ||
+                target.tagName === "TEXTAREA"
+            )
+        ) {
+
+            return;
+
+        }
+
+        if (
+            event.key === "ArrowLeft"
+        ) {
+
+            event.preventDefault();
+
+            goNext();
+
+            return;
+
+        }
+
+        if (
+            event.key === "ArrowRight"
+        ) {
+
+            event.preventDefault();
+
+            goPrev();
+
+            return;
+
+        }
+
+        if (
+            event.key === " " ||
+            event.key === "Enter"
+        ) {
+
+            event.preventDefault();
+
+            repeatCurrentDhikr();
+
+        }
+
+    },
+    false
+);
+
+
+/* =========================================================
+   ترحيل البيانات القديمة
+========================================================= */
+
+function migrateOldState() {
+
+    try {
+
+        const old =
+            localStorage.getItem(
+                "adhkar_app_v3"
+            );
+
+        if (!old) {
+
+            return;
+
+        }
+
+        const oldState =
+            JSON.parse(old);
+
+        const currentData =
+            localStorage.getItem(
+                STORAGE_KEY
+            );
+
+        if (currentData) {
+
+            return;
+
+        }
+
+        if (
+            oldState.counters &&
+            typeof oldState.counters ===
+                "object"
+        ) {
+
+            state.counters =
+                oldState.counters;
+
+        }
+
+        if (
+            oldState.theme
+        ) {
+
+            state.theme =
+                oldState.theme;
+
+        }
+
+        if (
+            oldState.font
+        ) {
+
+            state.font =
+                oldState.font;
+
+        }
+
+        if (
+            oldState.dailyActivity &&
+            typeof oldState.dailyActivity ===
+                "object"
+        ) {
+
+            Object.entries(
+                oldState.dailyActivity
+            )
+            .forEach(
+                function([key, value]) {
+
+                    if (
+                        value === true ||
+                        Number(value) > 0
+                    ) {
+
+                        state.dailyActivity[key] = {
+                            morning: false,
+                            evening: false,
+                            sleep: false,
+                            wake: false,
+                            general: true
+                        };
+
+                    }
+
+                }
+            );
+
+        }
+
+        saveState();
+
+    } catch (error) {
+
+        console.warn(
+            "تعذر نقل البيانات القديمة",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   تشغيل التطبيق
+========================================================= */
+
+function initializeApp() {
+
+    migrateOldState();
+
+    loadState();
+
+    tabs.forEach(
+        function(tab) {
+
+            tab.classList.toggle(
+                "active",
+                tab.getAttribute(
+                    "data-section"
+                ) ===
+                state.section
+            );
+
+        }
+    );
+
+    render();
+
+    updateStreakUI();
+
+}
+
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeApp,
+        false
+    );
+
+}
+
+else {
+
+    initializeApp();
+
+}
+
+
+/* =========================================================
+   ميزات إضافية (لا تغيّر الأذكار أو بياناتها)
+========================================================= */
+(function(){
+const SECS=['morning','evening','sleep','wake'];
+const COL={morning:'#4d8a5b',evening:'#d98a3d',sleep:'#5d8fc7',wake:'#d2b45e'};
+const MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const BOOKS={
+'صحيح البخاري':'الجامع الصحيح للإمام محمد بن إسماعيل البخاري (ت 256هـ)',
+'صحيح مسلم':'الإمام مسلم بن الحجاج النيسابوري (ت 261هـ)',
+'سنن أبي داود':'الإمام أبو داود السجستاني (ت 275هـ)',
+'سنن الترمذي':'الإمام أبو عيسى الترمذي (ت 279هـ)',
+'صحيح ابن حبان':'الإمام محمد بن حبان البستي (ت 354هـ)',
+'فضل الصلاة على النبي ﷺ':'ثبت فضل الصلاة على النبي ﷺ في أحاديث متعددة، ويُراجَع تخريج العدد المذكور (10) قبل النشر',
+'دعاء مأثور':'دعاء غير مرتبط بكتاب محدد في التطبيق؛ يجب التحقق من أصله قبل الاعتماد عليه'};
+/* التخريج التفصيلي: أضف هنا مفتاح "القسم_رقم الذكر" (يبدأ من 0) ونص التخريج */
+const REFS={
+'sleep_0':'صحيح البخاري، حديث رقم 6324 (ترقيم فتح الباري) — حديث حذيفة رضي الله عنه',
+'sleep_3':'صحيح البخاري، حديث رقم 2311 (ترقيم فتح الباري) — حديث أبي هريرة رضي الله عنه',
+'wake_0':'صحيح البخاري، حديث رقم 6312 (ترقيم فتح الباري) — حديث حذيفة رضي الله عنه'};
+let undoInfo=null,acT=null,calY=0,calM=0,dTab='today',saveWarned=false;
+const remFired={};
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0');
+
+function defaults(){
+ const t=dateKey();
+ if(!state.positions||typeof state.positions!=='object')state.positions={};
+ if(state.posDate!==t){state.positions={};state.posDate=t;state.index=0;}
+ state.reminders=Object.assign({morning:{on:false,time:'05:30'},evening:{on:false,time:'17:30'},sleep:{on:false,time:'22:00'}},state.reminders||{});
+ if(typeof state.vibrate!=='boolean')state.vibrate=true;
+ state.calm=state.calm===true;
+}
+function buzz(p){if(state.vibrate!==false&&navigator.vibrate){try{navigator.vibrate(p)}catch(e){}}}
+
+/* ---- حفظ آمن ---- */
+saveState=function(){
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));saveWarned=false;return true}
+ catch(e){console.warn(e);if(!saveWarned){saveWarned=true;showToast('⚠️ تعذّر حفظ التقدم: قد يكون التخزين ممتلئًا أو معطّلًا في هذا المتصفح')}return false}
+};
+window.addEventListener('pagehide',saveState);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)saveState()});
+
+/* ---- تحميل وعرض ---- */
+const _ld=loadState;
+loadState=function(){_ld();defaults();saveState()};
+const _rn=render;
+render=function(){_rn();if(state.positions)state.positions[state.section]=state.index;saveState();upUndo()};
+const _cs=changeSection;
+changeSection=function(s){
+ if(!adhkarData[s])return;
+ const p=(state.positions&&state.positions[s])||0;
+ _cs(s);
+ if(p>0&&p<adhkarData[s].length){state.index=p;render()}
+};
+
+/* ---- الضغط، التراجع، الإنجاز التلقائي ---- */
+const _rep=repeatCurrentDhikr;
+repeatCurrentDhikr=function(){
+ checkAndResetDailyCounters();
+ const it=currentDhikr(),key=counterKey(),before=Number(state.counters[key]||0),sec=state.section,idx=state.index;
+ if(!it||before>=it.repeat)return;
+ const day=dateKey(),wasA=!!(state.dailyActivity[day]&&state.dailyActivity[day][sec]),wasC=isCurrentSectionComplete();
+ _rep();
+ const after=Number(state.counters[key]||0);
+ if(after===before)return;
+ const nowA=!!(state.dailyActivity[day]&&state.dailyActivity[day][sec]);
+ undoInfo={sec,idx,key,day,newly:!wasA&&nowA};
+ buzz(after>=it.repeat?[25,40,25]:12);
+ upUndo();
+ if(!wasC&&isCurrentSectionComplete()){
+  clearTimeout(acT);
+  acT=setTimeout(()=>{if(state.section===sec&&isCurrentSectionComplete())completeSection()},650);
+ }
+};
+function upUndo(){const b=$('undoBtn');if(b)b.disabled=!undoInfo}
+function doUndo(){
+ if(!undoInfo)return;
+ const u=undoInfo;undoInfo=null;clearTimeout(acT);
+ const c=Number(state.counters[u.key]||0);
+ if(c>0)state.counters[u.key]=c-1;
+ if(u.newly){const a=state.dailyActivity[u.day];if(a){a[u.sec]=false;a.general=!!(a.morning||a.evening||a.sleep||a.wake)}}
+ saveState();
+ dhikrCard.style.display='block';completion.classList.remove('show');
+ if(state.section!==u.sec)changeSection(u.sec);
+ state.index=u.idx;render();updateStreakUI();
+ showToast('↩ تم التراجع عن آخر ضغطة');
+}
+
+/* ---- تحسين لوحة الاستمرار ---- */
+const _us=updateStreakUI;
+updateStreakUI=function(){
+ _us();
+ const box=$('lastDates');if(!box)return;
+ box.innerHTML=SECS.map(s=>'<div>'+sectionIcons[s]+' '+sectionNames[s]+'<b>'+formatStreakDate(getLastSectionActiveDay(s))+'</b></div>').join('');
+};
+const _cp=closePanels;
+closePanels=function(){_cp();['dashPanel','srcModal'].forEach(i=>{const e=$(i);if(e)e.classList.remove('show')})};
+
+/* ---- لوحات الإنجاز ---- */
+function secCount(k){return SECS.filter(s=>isSectionDayActive(k,s)).length}
+function dToday(){
+ let tD=0,tA=0,done=0,h='';
+ SECS.forEach(s=>{
+  const l=adhkarData[s],d=l.filter((it,i)=>Number(state.counters[s+'_'+i]||0)>=it.repeat).length,p=Math.round(d/l.length*100);
+  tD+=d;tA+=l.length;if(isSectionDayActive(dateKey(),s))done++;
+  h+='<div class="dcard"><div class="dtop"><b>'+sectionIcons[s]+' '+sectionNames[s]+'</b><span>'+p+'%</span></div><div class="dbar"><i style="width:'+p+'%;background:'+COL[s]+'"></i></div><small>✓ '+d+' مكتمل · '+(l.length-d)+' متبقٍ من '+l.length+'</small></div>';
+ });
+ return '<div class="dsum"><div class="big">'+Math.round(tD/tA*100)+'%</div><div>الإنجاز الإجمالي لليوم</div><small>'+tD+' ذكر مكتمل · '+(tA-tD)+' متبقٍ · أقسام مُنجزة اليوم: '+done+'/4</small></div>'+h;
+}
+function dCal(){
+ const off=(new Date(calY,calM,1).getDay()+1)%7,n=new Date(calY,calM+1,0).getDate(),t=dateKey();
+ let c=['س','ح','ن','ث','ر','خ','ج'].map(x=>'<div class="ch">'+x+'</div>').join('');
+ for(let i=0;i<off;i++)c+='<div></div>';
+ for(let d=1;d<=n;d++){
+  const k=calY+'-'+pad(calM+1)+'-'+pad(d);
+  c+='<div class="cc'+(k===t?' td':'')+'"><b>'+d+'</b><span>'+SECS.filter(s=>isSectionDayActive(k,s)).map(s=>'<i style="background:'+COL[s]+'"></i>').join('')+'</span></div>';
+ }
+ const leg=SECS.map(s=>'<span><i style="background:'+COL[s]+'"></i>'+sectionNames[s].replace('أذكار ','')+'</span>').join('');
+ return '<div class="calnav"><button class="nav-btn" data-cal="-1">→</button><b>'+MONTHS[calM]+' '+calY+'</b><button class="nav-btn" data-cal="1">←</button></div><div class="cgrid">'+c+'</div><div class="leg">'+leg+'</div>';
+}
+function dStats(){
+ const t=dateKey(),acts=state.dailyActivity||{},dow=(new Date().getDay()+1)%7,wk0=addDays(t,-dow),mp=t.slice(0,7);
+ let wk=0,mo=0;const per={morning:0,evening:0,sleep:0,wake:0};
+ Object.keys(acts).forEach(k=>{
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(k)||k>t)return;
+  const n=secCount(k);if(k>=wk0)wk+=n;
+  if(k.startsWith(mp)){mo+=n;SECS.forEach(s=>{if(isSectionDayActive(k,s))per[s]++})}
+ });
+ const ks=Object.keys(acts).filter(k=>/^\d{4}-\d{2}-\d{2}$/.test(k)&&k<=t&&isGeneralDayActive(k)).sort();
+ let best=0,run=0,prev=null;
+ ks.forEach(k=>{run=(prev&&daysBetween(prev,k)===1)?run+1:1;if(run>best)best=run;prev=k});
+ let avg=0;
+ if(ks.length){const win=Math.min(30,daysBetween(ks[0],t)+1);let sum=0;for(let i=0;i<win;i++)sum+=secCount(addDays(t,-i));avg=Math.round(sum/(win*4)*100)}
+ const WD=['ح','ن','ث','ر','خ','ج','س'];let bars='';
+ for(let i=6;i>=0;i--){
+  const k=addDays(t,-i),p=k.split('-').map(Number),n=secCount(k);
+  bars+='<div><i style="height:'+(n/4*100)+'%"></i>'+n+'<br>'+WD[new Date(p[0],p[1]-1,p[2]).getDay()]+'</div>';
+ }
+ const dm=Number(t.slice(8));
+ const sb=SECS.map(s=>'<div class="dcard"><div class="dtop"><span>'+sectionIcons[s]+' '+sectionNames[s]+'</span><span>'+per[s]+' يوم</span></div><div class="dbar"><i style="width:'+Math.round(per[s]/dm*100)+'%;background:'+COL[s]+'"></i></div></div>').join('');
+ return '<div class="sgrid"><div class="sbox"><b>'+wk+'</b><span>قسم مكتمل هذا الأسبوع</span></div><div class="sbox"><b>'+mo+'</b><span>قسم مكتمل هذا الشهر</span></div><div class="sbox"><b>'+best+'</b><span>أفضل سلسلة استمرار (يوم)</span></div><div class="sbox"><b>'+avg+'%</b><span>متوسط الالتزام (آخر 30 يومًا)</span></div></div><div class="h4">الأقسام المكتملة في آخر 7 أيام</div><div class="chart">'+bars+'</div><div class="h4">أيام إكمال كل قسم هذا الشهر</div>'+sb+'<p class="note">الأسبوع يبدأ من السبت. متوسط الالتزام = الأقسام المكتملة ÷ (4 × عدد الأيام).</p>';
+}
+function drawDash(){
+ document.querySelectorAll('.dtab').forEach(b=>b.classList.toggle('active',b.dataset.d===dTab));
+ $('dashBody').innerHTML=dTab==='today'?dToday():dTab==='cal'?dCal():dStats();
+}
+function openDash(tab){
+ checkAndResetDailyCounters();
+ const n=new Date();calY=n.getFullYear();calM=n.getMonth();dTab=tab||'today';
+ drawDash();$('dashPanel').classList.add('show');overlay.classList.add('show');
+}
+
+/* ---- المصدر والتخريج ---- */
+function openSrc(){
+ const it=currentDhikr();if(!it)return;
+ const ref=REFS[state.section+'_'+state.index];
+ $('srcBody').innerHTML=
+  '<div class="src-row"><small>القسم</small>'+sectionNames[state.section]+' — الذكر '+(state.index+1)+'</div>'+
+  '<div class="src-row"><small>عدد التكرار</small>'+it.repeat+'</div>'+
+  '<div class="src-row"><small>المصدر</small>'+it.source+'</div>'+
+  '<div class="src-row"><small>عن المصدر</small>'+(BOOKS[it.source]||'—')+'</div>'+
+  '<div class="src-row"><small>التخريج (رقم الحديث)</small>'+(ref||'لم يُدرج التخريج التفصيلي لهذا الذكر بعد')+'</div>'+
+  '<p class="note">يُنصح بمراجعة النص والتكرار ورقم الحديث وحكمه في طبعة معتمدة قبل نشر التطبيق، وعدم الاكتفاء باسم الكتاب.</p>';
+ $('srcModal').classList.add('show');overlay.classList.add('show');
+}
+
+/* ---- التذكيرات ---- */
+function notifyRem(s){
+ const m='حان وقت '+sectionNames[s]+' 🌿';
+ showToast(m);buzz([200,100,200]);
+ try{if('Notification' in window&&Notification.permission==='granted')new Notification('أذكاري',{body:m})}catch(e){}
+}
+async function scheduleNative(){
+ try{
+  const LN=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.LocalNotifications;if(!LN)return;
+  await LN.requestPermissions();
+  await LN.cancel({notifications:[{id:1},{id:2},{id:3}]});
+  const ids={morning:1,evening:2,sleep:3},list=[];
+  Object.keys(state.reminders).forEach(s=>{
+   const r=state.reminders[s];if(!r.on)return;
+   const hm=r.time.split(':').map(Number);
+   list.push({id:ids[s],title:'أذكاري',body:'حان وقت '+sectionNames[s],schedule:{on:{hour:hm[0],minute:hm[1]},allowWhileIdle:true}});
+  });
+  if(list.length)await LN.schedule({notifications:list});
+ }catch(e){console.warn(e)}
+}
+setInterval(()=>{
+ const d=new Date(),hm=pad(d.getHours())+':'+pad(d.getMinutes()),day=dateKey();
+ Object.keys(state.reminders||{}).forEach(s=>{
+  const r=state.reminders[s];
+  if(r.on&&r.time===hm&&remFired[s]!==day+hm){remFired[s]=day+hm;notifyRem(s)}
+ });
+},20000);
+
+function setCalm(on){state.calm=on;document.body.dataset.calm=on?'1':'';saveState()}
+
+/* ---- بناء الواجهة ---- */
+function init(){
+ defaults();
+ document.querySelector('.header-actions').insertAdjacentHTML('afterbegin','<button type="button" class="icon-btn" id="dashBtn" title="لوحة الإنجاز">📊</button><button type="button" class="icon-btn" id="calmBtn" title="الوضع الهادئ">🕊️</button>');
+ document.querySelector('.counter-section').insertAdjacentHTML('afterend','<div class="undo-row"><button type="button" class="nav-btn" id="undoBtn" disabled>↩ تراجع عن آخر ضغطة</button></div>');
+ $('restartBtn').insertAdjacentHTML('afterend','<button type="button" class="nav-btn primary" id="nextSecBtn">القسم التالي ←</button>');
+ document.body.insertAdjacentHTML('beforeend',
+  '<section class="streak-panel" id="dashPanel"><div class="streak-header"><h2>📊 لوحة الإنجاز</h2><button type="button" class="close-btn" id="closeDash">×</button></div><div class="dtabs"><button type="button" class="dtab" data-d="today">اليوم</button><button type="button" class="dtab" data-d="cal">التقويم</button><button type="button" class="dtab" data-d="stats">الإحصائيات</button></div><div id="dashBody"></div></section>'+
+  '<div class="src-modal" id="srcModal"><div class="panel-header"><h2>📖 تفاصيل المرجع</h2><button type="button" class="close-btn" id="closeSrc">×</button></div><div id="srcBody"></div></div>'+
+  '<button type="button" class="icon-btn" id="calmExit" title="إنهاء الوضع الهادئ">✕</button>');
+ const names={morning:'🌅 الصباح',evening:'🌇 المساء',sleep:'🌙 النوم'};
+ const rows=Object.keys(names).map(s=>'<div class="rem-row"><span>'+names[s]+'</span><input type="time" data-rt="'+s+'" value="'+state.reminders[s].time+'"><input type="checkbox" data-ro="'+s+'"'+(state.reminders[s].on?' checked':'')+'></div>').join('');
+ $('resetBtn').closest('.setting-group').insertAdjacentHTML('beforebegin',
+  '<div class="setting-group"><h3>⏰ التذكيرات</h3>'+rows+'<p class="note">تعمل التذكيرات أثناء فتح التطبيق. للإشعارات والتطبيق مغلق يلزم تحويله إلى APK مع إضافة Local Notifications (Capacitor)، وسيجدول التطبيق التذكيرات تلقائيًا إن وُجدت.</p></div>'+
+  '<div class="setting-group"><h3>🎛️ التفضيلات</h3><label class="opt"><span>اهتزاز خفيف عند الضغط والإكمال</span><input type="checkbox" id="vibOpt"'+(state.vibrate?' checked':'')+'></label><label class="opt"><span>الوضع الهادئ</span><input type="checkbox" id="calmOpt"'+(state.calm?' checked':'')+'></label><p class="note">يُحفظ كل شيء على جهازك فقط، ويعمل دون إنترنت ودون حساب (الخطوط الخارجية تعود لخط النظام عند انقطاع الاتصال).</p></div>');
+ $('streakMessage').insertAdjacentHTML('beforebegin',
+  '<div class="lastdates" id="lastDates"></div><details class="how"><summary>ℹ️ كيف تُحتسب أيام الاستمرار؟</summary><ul><li>يُحتسب اليوم لقسم ما فقط عند إكمال جميع أذكاره وتكراراتها، ولا يكفي فتحه.</li><li>السلسلة العامة: أيام متتالية أكملت فيها قسمًا واحدًا على الأقل.</li><li>إن أكملت أمس ولم تُكمل اليوم بعد، تبقى سلسلتك حتى نهاية اليوم؛ وإذا فات يوم كامل تعود إلى الصفر.</li><li>الاحتساب بتاريخ جهازك، وتغييره يدويًا قد يؤثر على السلسلة.</li><li>إعادة القسم لا تلغي إنجاز اليوم المسجّل. التواريخ أعلاه هي آخر إكمال فعلي لكل قسم.</li></ul></details>');
+
+ $('dashBtn').onclick=()=>openDash('today');
+ $('closeDash').onclick=closePanels;
+ $('closeSrc').onclick=closePanels;
+ $('dashPanel').addEventListener('click',e=>{
+  const t=e.target.closest('[data-d],[data-cal]');if(!t)return;
+  if(t.dataset.d){dTab=t.dataset.d}
+  else{calM+=Number(t.dataset.cal);if(calM<0){calM=11;calY--}if(calM>11){calM=0;calY++}}
+  drawDash();
+ });
+ $('undoBtn').onclick=doUndo;
+ $('nextSecBtn').onclick=()=>changeSection(SECS[(SECS.indexOf(state.section)+1)%4]);
+ dhikrSource.title='اضغط لعرض تفاصيل المرجع';
+ dhikrSource.addEventListener('click',openSrc);
+ $('calmBtn').onclick=()=>{setCalm(true);showToast('الوضع الهادئ — اضغط ✕ للخروج')};
+ $('calmExit').onclick=()=>setCalm(false);
+ $('calmOpt').onchange=e=>setCalm(e.target.checked);
+ $('vibOpt').onchange=e=>{state.vibrate=e.target.checked;saveState();if(state.vibrate)buzz(20)};
+ settingsPanel.addEventListener('change',e=>{
+  const t=e.target,s=t.dataset.rt||t.dataset.ro;if(!s)return;
+  if(t.dataset.rt)state.reminders[s].time=t.value||state.reminders[s].time;
+  else{
+   state.reminders[s].on=t.checked;
+   if(t.checked&&'Notification' in window&&Notification.permission==='default'){try{Notification.requestPermission()}catch(x){}}
+  }
+  saveState();scheduleNative();
+ });
+ document.body.dataset.calm=state.calm?'1':'';
+ upUndo();updateStreakUI();scheduleNative();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,false);
+else init();
+})();
+
+</script>
+
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(e){console.warn('SW',e)})})}
+</script>
+</body>
+</html>
