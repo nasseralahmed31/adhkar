@@ -6,6 +6,13 @@
     "@capacitor/android": "^6.2.0",
     "@capacitor/cli": "^6.2.0",
     "@capacitor/core": "^6.2.0",
-    "@capacitor/local-notifications": "^6.1.0"
+    "@capacitor/local-notifications": "^6.1.0",
+    "@capacitor/haptics": "^6.0.0",
+    "@fontsource/noto-naskh-arabic": "^5.0.0",
+    "@fontsource/amiri": "^5.0.0",
+    "@fontsource/scheherazade-new": "^5.0.0",
+    "@fontsource/lateef": "^5.0.0",
+    "@fontsource/cairo": "^5.0.0",
+    "@fontsource/reem-kufi": "^5.0.0"
   }
 }

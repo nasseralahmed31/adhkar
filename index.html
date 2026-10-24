@@ -4759,11 +4759,16 @@ function defaults(){
  const t=dateKey();
  if(!state.positions||typeof state.positions!=='object')state.positions={};
  if(state.posDate!==t){state.positions={};state.posDate=t;state.index=0;}
- state.reminders=Object.assign({morning:{on:false,time:'05:30'},evening:{on:false,time:'17:30'},sleep:{on:false,time:'22:00'}},state.reminders||{});
+ state.reminders=Object.assign({morning:{on:false,time:'05:30'},evening:{on:false,time:'17:30'},sleep:{on:false,time:'22:00'},wake:{on:false,time:'05:00'}},state.reminders||{});
  if(typeof state.vibrate!=='boolean')state.vibrate=true;
  state.calm=state.calm===true;
 }
-function buzz(p){if(state.vibrate!==false&&navigator.vibrate){try{navigator.vibrate(p)}catch(e){}}}
+function buzz(p){
+ if(state.vibrate===false)return;
+ var H=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.Haptics,seq=Array.isArray(p)?p:[p];
+ if(H&&H.vibrate){var t=0;seq.forEach(function(d,i){if(i%2===0){setTimeout(function(){try{H.vibrate({duration:Math.max(d,30)})}catch(e){}},t)}t+=d});return}
+ if(navigator.vibrate){try{navigator.vibrate(p)}catch(e){}}
+}
 
 /* ---- حفظ آمن ---- */
 saveState=function(){
@@ -4907,12 +4912,12 @@ async function scheduleNative(){
  try{
   const LN=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.LocalNotifications;if(!LN)return;
   await LN.requestPermissions();
-  await LN.cancel({notifications:[{id:1},{id:2},{id:3}]});
-  const ids={morning:1,evening:2,sleep:3},list=[];
+  await LN.cancel({notifications:[{id:1},{id:2},{id:3},{id:4}]});
+  const ids={morning:1,evening:2,sleep:3,wake:4},list=[];
   Object.keys(state.reminders).forEach(s=>{
    const r=state.reminders[s];if(!r.on)return;
    const hm=r.time.split(':').map(Number);
-   list.push({id:ids[s],title:'أذكاري',body:'حان وقت '+sectionNames[s],schedule:{on:{hour:hm[0],minute:hm[1]},allowWhileIdle:true}});
+   list.push({id:ids[s],title:'أذكاري',body:'حان وقت '+sectionNames[s],schedule:{on:{hour:hm[0],minute:hm[1],second:0},allowWhileIdle:true}});
   });
   if(list.length)await LN.schedule({notifications:list});
  }catch(e){console.warn(e)}
@@ -4923,7 +4928,7 @@ setInterval(()=>{
   const r=state.reminders[s];
   if(r.on&&r.time===hm&&remFired[s]!==day+hm&&!(window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.LocalNotifications)){remFired[s]=day+hm;notifyRem(s)}
  });
-},20000);
+},5000);
 
 function setCalm(on){state.calm=on;document.body.dataset.calm=on?'1':'';saveState()}
 
@@ -4937,10 +4942,10 @@ function init(){
   '<section class="streak-panel" id="dashPanel"><div class="streak-header"><h2>📊 لوحة الإنجاز</h2><button type="button" class="close-btn" id="closeDash">×</button></div><div class="dtabs"><button type="button" class="dtab" data-d="today">اليوم</button><button type="button" class="dtab" data-d="cal">التقويم</button><button type="button" class="dtab" data-d="stats">الإحصائيات</button></div><div id="dashBody"></div></section>'+
   '<div class="src-modal" id="srcModal"><div class="panel-header"><h2>📖 تفاصيل المرجع</h2><button type="button" class="close-btn" id="closeSrc">×</button></div><div id="srcBody"></div></div>'+
   '<button type="button" class="icon-btn" id="calmExit" title="إنهاء الوضع الهادئ">✕</button>');
- const names={morning:'🌅 الصباح',evening:'🌇 المساء',sleep:'🌙 النوم'};
+ const names={morning:'🌅 الصباح',evening:'🌇 المساء',sleep:'🌙 النوم',wake:'☀️ الاستيقاظ'};
  const rows=Object.keys(names).map(s=>'<div class="rem-row"><span>'+names[s]+'</span><input type="time" data-rt="'+s+'" value="'+state.reminders[s].time+'"><input type="checkbox" data-ro="'+s+'"'+(state.reminders[s].on?' checked':'')+'></div>').join('');
  $('resetBtn').closest('.setting-group').insertAdjacentHTML('beforebegin',
-  '<div class="setting-group"><h3>⏰ التذكيرات</h3>'+rows+'<p class="note">تعمل التذكيرات أثناء فتح التطبيق. للإشعارات والتطبيق مغلق يلزم تحويله إلى APK مع إضافة Local Notifications (Capacitor)، وسيجدول التطبيق التذكيرات تلقائيًا إن وُجدت.</p></div>'+
+  '<div class="setting-group"><h3>⏰ التذكيرات</h3>'+rows+'</div>'+
   '<div class="setting-group"><h3>🎛️ التفضيلات</h3><label class="opt"><span>اهتزاز خفيف عند الضغط والإكمال</span><input type="checkbox" id="vibOpt"'+(state.vibrate?' checked':'')+'></label><label class="opt"><span>الوضع الهادئ</span><input type="checkbox" id="calmOpt"'+(state.calm?' checked':'')+'></label><p class="note">يُحفظ كل شيء على جهازك فقط، ويعمل دون إنترنت ودون حساب (الخطوط الخارجية تعود لخط النظام عند انقطاع الاتصال).</p></div>');
  $('streakMessage').insertAdjacentHTML('beforebegin',
   '<div class="lastdates" id="lastDates"></div><details class="how"><summary>ℹ️ كيف تُحتسب أيام الاستمرار؟</summary><ul><li>يُحتسب اليوم لقسم ما فقط عند إكمال جميع أذكاره وتكراراتها، ولا يكفي فتحه.</li><li>السلسلة العامة: أيام متتالية أكملت فيها قسمًا واحدًا على الأقل.</li><li>إن أكملت أمس ولم تُكمل اليوم بعد، تبقى سلسلتك حتى نهاية اليوم؛ وإذا فات يوم كامل تعود إلى الصفر.</li><li>الاحتساب بتاريخ جهازك، وتغييره يدويًا قد يؤثر على السلسلة.</li><li>إعادة القسم لا تلغي إنجاز اليوم المسجّل. التواريخ أعلاه هي آخر إكمال فعلي لكل قسم.</li></ul></details>');
@@ -4984,7 +4989,7 @@ else init();
 (function(){
 function pad(n){return String(n).padStart(2,'0')}
 function makeICS(){
- var nm={morning:'أذكار الصباح',evening:'أذكار المساء',sleep:'أذكار النوم'},R=state.reminders||{},keys=Object.keys(nm),on=keys.filter(function(k){return R[k]&&R[k].on});
+ var nm={morning:'أذكار الصباح',evening:'أذكار المساء',sleep:'أذكار النوم',wake:'أذكار الاستيقاظ'},R=state.reminders||{},keys=Object.keys(nm),on=keys.filter(function(k){return R[k]&&R[k].on});
  if(!on.length)on=keys;
  var d=new Date(),ymd=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate()),o='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Adhkari//AR\r\nCALSCALE:GREGORIAN\r\n';
  on.forEach(function(k){
