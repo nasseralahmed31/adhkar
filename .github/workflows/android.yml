@@ -13,26 +13,7 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - name: Prepare web files
-        run: |
-          mkdir -p www assets
-          cp index.html manifest.json sw.js icon-192.png icon-512.png www/
-          cp icon-1024.png assets/icon.png
-          cp splash-2732.png assets/splash.png
-          npm install
-          npx cap add android
-      - name: Generate icons
-        continue-on-error: true
-        run: npx -y @capacitor/assets@3 generate --android --iconBackgroundColor '#c1bca8' --iconBackgroundColorDark '#c1bca8' --splashBackgroundColor '#c1bca8' --splashBackgroundColorDark '#c1bca8'
-      - name: Permissions and sync
-        run: |
-          sed -i 's#</manifest>#<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/><uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/><uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/></manifest>#' android/app/src/main/AndroidManifest.xml
-          npx cap sync android
-      - name: Build
-        run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+      - run: bash build.sh
       - uses: actions/upload-artifact@v4
         with:
           name: adhkari-apk
